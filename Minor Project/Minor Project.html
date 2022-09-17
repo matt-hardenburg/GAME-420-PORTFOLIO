@@ -114,7 +114,7 @@ hr.clear {
     (elseif: $log is &quot;youMiss&quot;)
     	[You missed!]
 	(elseif: $log is &quot;heal&quot;)
-    	[You healed yourself, for $toHeal health.]
+    	[You healed yourself, for $toHeal health. (2 turn cooldown)]
 	(elseif: $log is &quot;eHit&quot;)
     	[The $eName uses &#39;$eAtkName&#39; on you, dealing $eAtk damage.]
     (elseif: $log is &quot;eCrit&quot;)
@@ -125,7 +125,7 @@ hr.clear {
 &lt;/div&gt;}</tw-passagedata><tw-passagedata pid="3" name="Enemy" tags="" position="200,450" size="100,100">{&lt;div id=&quot;enemy&quot;&gt;$eName HP: $eHP/$mHP.&lt;/div&gt;}</tw-passagedata><tw-passagedata pid="4" name="You" tags="" position="200,650" size="100,100">{&lt;div id=&quot;you&quot;&gt;Your HP: $HP/$maxHP
 
 (if: $turn is &quot;you&quot;)[
-&lt;br&gt;&lt;/br&gt;
+	&lt;br&gt;&lt;/br&gt;
 		(link: &quot;Dagger&quot;)[
 			(set: $toHit to (random: 1, 20) + 3)
 			(if: $toHit is &gt; 10)[
@@ -162,15 +162,18 @@ hr.clear {
         (set: $turn to &quot;enemy&quot;)
 		(goto: &quot;Combat&quot;)]
 ---
+	(if: $healCooldown &lt;= 0)[
 	(link: &quot;Abyssal Heal&quot;)[
-        (set: $toHeal to (random: 15, 40))
-        (if: $HP + $toHeal + 5 &lt; $maxHP)[
-        	(set: $HP to it + $toHeal + 5)]
+        (set: $toHeal to (random: 15, 30))
+        (set: $healCooldown to 2)
+        (if: $HP + $toHeal &lt; $maxHP)[
+        	(set: $HP to it + $toHeal)]
         (else:)[
         	(set: $HP to $maxHP)]
         (set: $turn to &quot;enemy&quot;)
         (set: $log to &quot;heal&quot;)
         (goto: &quot;Combat&quot;)]]
+    (set: $healCooldown to it - 1)]
 
 (else:)[
 &lt;br&gt;&lt;/br&gt;
@@ -192,7 +195,7 @@ hr.clear {
                 	(set: $HP to it - $eAtk)
                 	(set: $log to &quot;eCrit&quot;)]
                 (if: $boss is &quot;imp&quot;)[
-                	(set: $eAtk to 2.5 * (random: 3, 15))
+                	(set: $eAtk to 2.5 * (random: 5, 15))
                 	(set: $HP to it - $eAtk)
                 	(set: $log to &quot;eCrit&quot;)]]
             &lt;!--HIT--&gt;
@@ -206,11 +209,11 @@ hr.clear {
                 	(set: $HP to it - $eAtk)
             		(set: $log to &quot;eHit&quot;)]
                 (if: $boss is &quot;ooze&quot;)[            	
-                	(set: $eAtk to (random: 5, 15) + 5)
+                	(set: $eAtk to (random: 5, 15)+1)
                 	(set: $HP to it - $eAtk)
             		(set: $log to &quot;eHit&quot;)]
                 (if: $boss is &quot;imp&quot;)[
-                	(set: $eAtk to (random: 5, 15) + 3)
+                	(set: $eAtk to (random: 5, 17) + 3)
                 	(set: $HP to it - $eAtk)
             		(set: $log to &quot;eHit&quot;)]]]
         &lt;!--MISS--&gt;
@@ -241,13 +244,13 @@ As the enormous imp falls to the ground slain, its as if the world around you sh
 
 You emerge under the night sky in the ruins of some sort of fort. You look around to gather more information, as clearly this was not a return portal to the Avowed. Nothing is ever easy, is it?
 
-The ceiling is nonexistant, and the walls have long since crumbled, many gaps in the surface exposing the surrounding landscape. The ruins are littered with corpses surrounded by charred books. You feel like you’ve seen the simple garb that adorning each and every one of the corpses. This is the garb of the Avowed. As the realization slowly sets in a sense of panics wells up within you. What could have possibly happened in the 24 hours you were gone?
+The ceiling is nonexistent, and the walls have long since crumbled, many gaps in the surface exposing the surrounding landscape. The ruins are littered with corpses surrounded by charred books. You feel like you’ve seen the simple garb that adorning each and every one of the corpses. This is the garb of the Avowed. As the realization slowly sets in, a sense of panic wells up within you. What could have possibly happened in the day that you were gone?
 
 Your train of thought is interrupted by the shifting of rubble to your left. Your hand flies to your well-used dagger, before a familiar voice interrupts, “Stay your blade warlock! Do you so eagerly bite the hand that feeds?”
 
 A haggard old man in tattered Avowed garb scurries up to you, inspecting you over excitedly while rambling, “ I knew you would come back they didn’t believe me … but I knew you would … they didn’t think of the time dilation because they are foolish… but I am not… I knew you would come back … “
 
-Satisfied that you are who he’s been waiting for, the man flashes you a near-toothless grin. “You’ve been gone for 50 years warlock, and your money is long gone. As is our order. I am all that remains, but now you have returned with Matreus and he can –“, he stops abrupty. “He died in that trap didn’t he? My tricks have always been way above his head, no wonder he couldn’t make it out… but you are different. You singlehandedly demolished my mansion.” 
+Satisfied that you are who he’s been waiting for, the man flashes you a near-toothless grin. “You’ve been away for 50 years warlock, and your money is long gone. As is our order. I am all that remains, but now you have returned with Matreus and he can –“, he stops abruptly. “He died in that trap didn’t he? My tricks have always been way above his head, no wonder he couldn’t make it out… but you are different. You singlehandedly demolished my mansion.” 
 
 Suddenly the man stands up full straight, the years seeming to wash away from his skin until the very man who hired you for this hellish excursion stands before your eyes. For a brief second his face shifts, and you swear you can make out the guise of your own patron. Before you can fully register this, his face returns to normal. He walks towards the exit confidently before turning back and declaring, “Come warlock, there’s work to be done.”
 
@@ -260,15 +263,15 @@ You have unfortunately shuffled off this mortal coil.
 (link: &quot;You feel an intense energy dragging you back to the mansion&quot;)[
 (link: &quot;Embrace rebirth&quot;)[(goto: &quot;Arrival&quot;)]
 (link: &quot;Accept death&quot;)[(goto: &quot;Intro&quot;)]]</tw-passagedata><tw-passagedata pid="7" name="Start" tags="" position="200,300" size="100,100">=&gt;&lt;=
-You don’t remember how you came to work for the Avowed scholars. In the end, it doesn’t really matter. Gold is gold, and they pay handsomely. Handsome pay however naturally pairs with terrible danger.
+You don’t remember how you came to work for the Avowed scholars. In the end, its of no import. Gold is gold, and they pay handsomely. Handsome pay however naturally pairs with terrible danger.
 
-Usually you prefer to work alone. Being a warlock is enough to dissuade most people from associating with you, but your patron especially dislikes aiding mortals for “helpful” (boring as he calls it) reasons. This has often led to you being exiled after a short period from most villages you stay in. Your natural tendencies were subdued however by the large sum of gold, and your patron seems to agree.
+Usually you prefer to work alone. Being a warlock is enough to dissuade most people from associating with you, but your patron especially dislikes aiding mortals for “helpful” (boring as he calls it) reasons. This has often led to your exile from most villages despite the brevity of your stay. Your natural tendencies were subdued however by the large sum of gold, and your patron seems to agree.
 
-The job is to extract a member of the Avowed from a mansion located exclusively in an interdimensional space. He entered the portal nearly a year ago, and has not emerged yet. Time has been known to flow differently in pocket dimensions, so a waiting period was not unexpected. This however, has been the longest an Avowed has ever went without contact.
+The job is to extract a member of the Avowed from a mansion located in an interdimensional space. He entered the portal nearly a year ago, and has not emerged yet. Time has been known to flow differently in pocket dimensions, so a waiting period was not unexpected. This however, has been the longest an Avowed has ever went without contact.
 
-Due to the possible toll on your lifespan, this job pays each willing member of the rescue team the full amount of 1000 gold pieces, rather than having to divide it amongst themselves.
+Due to the possible toll on your lifespan, this job pays each willing member of the rescue team the full amount of 1000 gold pieces.
 
-The only other fools to volunteer were an eccentric gnomish wizard by the name of Boddynock, and a foolhardy but ultimately well-meaning dragonborn paladin named Gorrador. After a short period of exchanging pleasantries, the Avowed notfiy you that the entry portal is ready. It’s time to make some money.
+The only other fools to volunteer were an eccentric gnomish wizard by the name of Boddynock, and a foolhardy but ultimately well-meaning dragonborn paladin named Gorrador. After a short period of exchanging pleasantries, the Avowed notify you that the entry portal is ready. It’s time to make some money.
 
 &lt;div id=&#39;choices&#39;&gt;
 (link: &quot;Head through the portal&quot;)[(goto: &quot;Arrival&quot;)]
@@ -287,7 +290,7 @@ The only other fools to volunteer were an eccentric gnomish wizard by the name o
 The foyer of the mansion would have been elegant had the mansion not fallen into disrepair. Moldy couches form a semicircle around a firepit, with the opening facing the door. This might prove to be a nice spot to take a //rest//. The path branches out in 3 directions from the entrance.
 
 
-There is a flight of stairsleading up to the second floor on each side of the fireplace, creating a perfectly symmetrical scene from your point of view. 
+There is a flight of stairs leading up to the second floor on each side of the fireplace, creating a perfectly symmetrical scene from your point of view. 
 
 
 There is a hallway to the left, covered with cobwebs conveniently at exactly your head-level. You can scarcely make out a pair of slightly ajar double doors at the end of the hallway.
@@ -309,7 +312,7 @@ Head (link: &quot;left&quot;)[(goto: &quot;Library&quot;)]/(link: &quot;right&qu
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Password" tags="" position="900,450" size="100,100">&lt;img class=&quot;right-side large&quot; src=&quot;img/lock.jpg&quot;&gt;
 
 =&gt;&lt;=
-Somehow both inside and not inside the outer surface of the door, a swirling green glow bars your escape. 
+Both within and upon the door lies a swirling green glow, barring your escape
 
 Any attempt to touch the portal leaves you with a stinging burn.
 
@@ -320,7 +323,7 @@ Any attempt to touch the portal leaves you with a stinging burn.
 		(goto: &quot;Foyer&quot;)]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Study" tags="" position="900,750" size="100,100">=&gt;&lt;=
 As you enter the room, you see no signs that Matreus died here. There just simply is no corpse and the eerie smoke is nowehere to be seen.
 
-The room, however, has been entirely trashed. All of Matreus’s research has been incinerated, leaving naught but piles of ash and charred leather.
+The room, however, has been thoroughly ransacked. All of Matreus’s research has been incinerated, leaving naught but piles of ash and charred leather.
 
 The only ray of hope in this room is to secret doorway built into the bookshelf that has been opened by someone… Could it have been Matreus?
 
@@ -334,7 +337,7 @@ The only ray of hope in this room is to secret doorway built into the bookshelf 
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Basement" tags="" position="900,900" size="100,100">=&gt;&lt;=
 As you enter the basement, the smell of mold immediately assaults you. Thankfully, you’ve always been able to see perfectly in the dark. Darkvision is what one of the villagers once called it. You see that the walls are made of stone bricks with cracks running along the wall parallel to the floor. 
 
-For some reason, the water in the basement drips from the floor the ceiling. Fearing some for of gravity-based trap, you cautiously survey the “ceiling”. Despite the inverted gravity on the infinite stream of water droplets, the room appears to be perfectly right-side up.
+For some reason, the water in the basement drips from the floor to the ceiling. Fearing some sort of gravity-based trap, you cautiously survey the “ceiling”. Despite the inverted gravity on the infinite stream of water droplets, the room appears to be perfectly right-side up.
 
 Examining the room shows no signs of Matreus, or any sort of sentient life. 
 
@@ -351,7 +354,7 @@ Although there appears to be a gurgling tar pit in the center of the basement.
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="Library" tags="" position="750,600" size="100,100">=&gt;&lt;=
 
 (if: $killedBook is false)[
-As you enter the room, all you can see are books. The place is absolutely cluttered with them. This seems to be the personal library of Fistandia. Each wall is adorned by bookshelves from end to end, with only a single desk pushed against the largest bookshelf at the far wall.
+As you enter the room, all you can see are books. The room is absolutely lousy with them. This seems to be the personal library of Fistandia. Each wall is adorned by bookshelves from end to end, with only a single desk pushed against the largest bookshelf at the far wall.
 
 Despite the surplus of books, there is but one on the desk. This book has been left open, but you are too far away to see any of its contents.
 
@@ -368,10 +371,10 @@ You could spend hours poring through the surplus of tomes and not even scratch 1
 (link: &quot;Return to the foyer&quot;)[
 		(goto: &quot;Foyer&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Master Bedroom" tags="" position="1050,600" size="100,100">=&gt;&lt;=
-Now at the top of the stairs, you see 3 rooms before you. However, the roof over both the left and right sections have collapsed rendering them inaccessible. The door at the far end is slightly ajar, letting the flickering of lamp light spill into the dark hallway.
+Now at the top of the stairs, you see three rooms before you. However, the roof over both the left and right sections have collapsed rendering them inaccessible. The door at the far end is slightly ajar, letting the flickering of lamp light spill into the dark hallway.
 
 (if: $killedSword is false)[
-As you stealthily near the room, you begin to make out the sounds of repeated metallic clinking. You soon realize that this is the sound of swords repeatedly striking each other.
+As you stealthily approach the room, you begin to make out the sounds of repeated metallic clinking. You soon realize that this is the sound of swords repeatedly striking each other.
 
 Before you can investigate further, the sound of heavy dragonborn footsteps echo through the halls, rendering all your sneaking useless. By time the lumbering paladin reaches you, the noises from the room have stopped.
 &lt;br&gt;&lt;/br&gt;
@@ -388,7 +391,7 @@ He nods eagerly, indicating his understanding, yet you can tell from his vacant 
 
 He stands before the door confidently and flings it open ready to protect the fragile warlock from whatever scares him.
 
-In simple terms, it’s a massacre, four flying swords descend upon the paladin immediately. They danced circle around effortlessly slashed at him, littering his body with precise cuts. Gorrador didn’t go down easily, however. Whether it was divine intervention from his god, or pure determination, he managed to demolish two of the swords before the other two went for the killing blow. While he is preoccupied with destroying two of the flying swords, his back was completely exposed. The valiant paladin was savagely run through and fell to ground, finally defeated.
+In simple terms, it’s a massacre, four flying swords descend upon the paladin immediately. They dance around him effortlessly, littering his body with precise cuts. Gorrador didn’t go down easily, however. Whether it was divine intervention from his god, or pure determination, he managed to demolish two of the swords before the other two went for the killing blow. While he is preoccupied with destroying two of the flying swords, his back was completely exposed. The valiant paladin was savagely run through and fell to ground, finally defeated.
 
 After felling their opponent, the remaining pair of flying swords rear back ready for their next duel…
 
@@ -426,11 +429,12 @@ The ooze begins to shamble forward, and there is but one course of action…
 =&gt;&lt;=
 As you approach the open book on the table, the doors to the library slam shut. You are now alone with Boddynock and the open book. 
 
-Boddynock rushes forward to examine the book, his curiosity overflowing, not even noticing that the two of you are now trapped. Despite his stature, the little man is //fast//. He reaches the book by time you’ve taken your first step, and you are forced to watch in horror at the scene unfolding before you.
+Boddynock rushes forward to examine the book, His curiosity getting the better of him, oblivious to the fact that the two of you are now trapped. Despite his stature, the little man is //fast//. He reaches the book by the time you’ve taken your first step, and you are forced to watch in horror as the scene unfolds before you.
 
-As Boddynock extends his hand towards the book, a chain flies out of the bookshelf behind and wraps itself tightly around his wrist with just enough pressure not to snap it. The gnome tries in vain to free his hand as three more chains appear and bind his other wrist as well as each of his ankles. The chains begin to retract, and he cries out in vain as he is pressed against the immoveable bookshelf with tremendous force.
+As Boddynock extends his hand towards the book, a chain flies out from the bookshelf in front of him, and begins to wrap tightly around his wrist with just enough pressure not to snap it. The gnome tries in vain to free his hand as three more chains appear and bind his other wrist as well as each of his ankles. The chains begin to retract, and he cries out in vain as he is pressed against the immoveable bookshelf with tremendous force.
 
-By time you get close enough to even attempt a rescue, it is too late. His small frame could only take so much and lies crumpled on the table next to the book he was enamored with. Before you can begin to mourn, numerous chains emerge with each grabbing its own book to hurl.
+By time you get close enough to attempt a rescue, it is too late. His small frame could only take so much and lies crumpled on the table next to the book he was so enamored with. Before you can begin to mourn, numerous chains emerge each armed with a book to hurl
+
 
 
 (set: $boss to &quot;book&quot;)
@@ -444,15 +448,15 @@ By time you get close enough to even attempt a rescue, it is too late. His small
 (link: &quot;Defend yourself!&quot;)[
 	(goto: &quot;Combat&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="18" name="RIP Matreus" tags="" position="400,300" size="100,100">=&gt;&lt;=
-The old man has been lecturing even though you were not even following him right off the bat. You and your compatriots rush to catch up, most likely having already missed vital information.
+The old man continues lecturing despite your belated accompaniment. You and your compatriots rush to catch up, most likely having already missed vital information.
 
 “… and I only found four of those damn letters. How many more could there be? I’ve exhausted all the possible combinations of ‘L’, ‘I, ‘E’, and ‘T’ and nothing seems to open that door.” 
 
 You try to interrupt and ask him to repeat that first part, but he carries on, oblivious to your pleas, “There’s still three sections of this decrepit cesspool that I haven’t investigated, but my arcane probe was destroyed in each of those areas. With the four of us though, whatever it is won’t stand a chance.”
 
-As he reaches the end of the hallway, he turns back towards your party, “Here in my temporary study we can formulate a plan for finding these remaining letters.” He trusts open the door and ventures in.
+As he reaches the end of the hallway, he turns back towards your party, “Here in my temporary study we can formulate a plan for finding these remaining letters.” He thrusts open the door and ventures in.
 
-However, before anyone else can enter the room, a pitch black smoke emerges from each corner of the room quickly encircling Matreus. He tries to quickly cast some form of protective ward but is too slow for this ethereal menace. The last time you see Matreus his eyes are filled with fear, before suddenly the door slams shut. You hear Matreus begin to shriek in pain before a second, deeper voice emerges, laughing in tandem to Matreus’s cries. 
+However, before anyone else can enter the room, a pitch black smoke emerges from each corner of the room quickly encircling Matreus. He tries to quickly cast some form of protective ward but is too slow for this ethereal menace. The last thing you see of Matreus are his eyes filled with fear.  Suddenly, the door slams shut. You hear Matreus begin to shriek in pain before a second, deeper voice emerges, laughing in tandem to Matreus’s cries. 
 
 Suddenly, you are sent flying back by a powerful blast of energy and slam into the floor near the entrance in the foyer. The world slowly fades to black...
 
@@ -471,7 +475,7 @@ You attempt to calm the frazzled old man down, and begin to explain that you wer
 
 He heads down the hallway to the right, and exclaims, “Well then let’s get moving! I’ve already been stuck in here for a week and I cannot find any more information on this damned command word.” 
 
-
+(set: $healCooldown to 0)
 (set: $foundNames to (a: &quot;I&quot;, &quot;L&quot;, &quot;T&quot;, &quot;E&quot;))
 (set: $maxHP to 100)
 (set: $HP to 100)
@@ -486,7 +490,7 @@ He heads down the hallway to the right, and exclaims, “Well then let’s get m
 =&gt;&lt;=
 As you utter the command word “LIBERTY”, the portal shrinks down to the size of your palm. While you puzzle over what to do next, a familiar sense of dread overcomes you.
 
-You hear a voice echo through your mind, “&#39;&#39;You can’t escape … no one escapes my home!&#39;&#39;” Suddenly, that same black fog that appeared earlier in the study steadily flows into the foyer from both ends of the hallway and down the symmetric stairs.
+You hear a voice echo through your mind, “&#39;&#39;YoU CANNOT esCApE … No oNE EscAPeS my HOME!!&#39;&#39;” Suddenly, that same black fog that appeared earlier in the study steadily flows into the foyer from both ends of the hallway and down the symmetric stairs.
 
 This time however, the smoke does not envelop you like it did Matreus, but rather coalesces into something enormous. As the smoke dissipates, you see an enormous imp standing before you. 
 
@@ -494,8 +498,8 @@ His laugh echoes throughout the entire house and he readies himself to pounce.
 
 
 (set: $boss to &quot;imp&quot;)
-(set: $eHP to 275)
-(set: $mHP to 275)
+(set: $eHP to 250)
+(set: $mHP to 250)
 (set: $eName to &quot;Enormous Imp&quot;)
 (set: $turn to &quot;you&quot;)
 (set: $eAtkName to &quot;Fiery Claws&quot;)
@@ -509,6 +513,7 @@ Known Letters: $foundNames
 (set: $code to (prompt: &quot;What is the release word?&quot;, 
 				&quot;&quot;, &quot;Turn Back&quot;, &quot;Confirm&quot;))
                 
+(set: $code to (lowercase: $code))
 (lowercase: $code)
 
 (if: $code is &quot;liberty&quot;)[
@@ -523,7 +528,7 @@ Nothing happens. That was evidently not the release word
 		(goto: &quot;Foyer&quot;)]]&lt;/div&gt;
 
 </tw-passagedata><tw-passagedata pid="22" name="Post Boss (Book)" tags="" position="600,750" size="100,100">=&gt;&lt;=
-With the finishing blow struck, the chains no longer are sentient. Gravity takes over and they fall lifelessly downwards. The doors leading into the library slowly swing open, no longer sealed. Now to see if Boddynock’s death was in vain…
+With the finishing blow struck, the chains no longer hold sentience. Gravity takes over and they fall lifelessly downwards. The doors leading into the library slowly swing open, no longer sealed. Now to see if Boddynock’s death was in vain…
 
 You gingerly move the shattered corpse aside and examine the book. You inspect the cover as instructed by the late Matreus and find only the letter ‘B’. This has got to be it; no other book could be so esoteric.
 
@@ -566,7 +571,7 @@ After the strenuous encounter, you feel somewhat more ready to face the challeng
 
 &lt;div id=&#39;choices&#39;&gt;
 (link: &quot;Return to foyer&quot;)[
-		(goto: &quot;Foyer&quot;)]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="DEV SHORTCUT" tags="" position="475,450" size="100,100">(set: $eHP to 175)
+		(goto: &quot;Foyer&quot;)]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="DEV SHORTCUT" tags="" position="650,300" size="100,100">(set: $eHP to 175)
 (set: $mHP to 175)
 (set: $eName to &quot;Pair of Swords&quot;)
 (set: $turn to &quot;you&quot;)
