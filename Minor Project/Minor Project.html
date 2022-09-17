@@ -339,12 +339,13 @@ For some reason, the water in the basement drips from the floor the ceiling. Fea
 Examining the room shows no signs of Matreus, or any sort of sentient life. 
 
 
-&lt;div id=&#39;choices&#39;&gt;
 (if: $killedOoze is false)[
 Although there appears to be a gurgling tar pit in the center of the basement.
+&lt;br&gt;&lt;/br&gt;
         (link: &quot;Inspect the gurgling&quot;)[
         		(goto: &quot;Ooze Boss&quot;)]]
                 
+&lt;div id=&quot;choices&quot;&gt;               
 (link: &quot;Return to the study&quot;)[
 		(goto: &quot;Study&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="Library" tags="" position="750,600" size="100,100">=&gt;&lt;=
@@ -355,10 +356,10 @@ As you enter the room, all you can see are books. The place is absolutely clutte
 Despite the surplus of books, there is but one on the desk. This book has been left open, but you are too far away to see any of its contents.
 
 The gnome wizard, Boddynock, enters the room shortly after you, spurred on by the quest for knowledge.
-&lt;div id=&#39;choices&#39;&gt;
+&lt;br&gt;&lt;/br&gt;
 		(link: &quot;Examine the open book on the desk&quot;)[
         		(goto: &quot;Book Boss&quot;)]]
-&lt;/div&gt;
+
 
 (else:)[
 You could spend hours poring through the surplus of tomes and not even scratch 10% of them off the list. If the circumstances weren&#39;t so dire, perhaps you would... ]
@@ -369,13 +370,14 @@ You could spend hours poring through the surplus of tomes and not even scratch 1
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Master Bedroom" tags="" position="1050,600" size="100,100">=&gt;&lt;=
 Now at the top of the stairs, you see 3 rooms before you. However, the roof over both the left and right sections have collapsed rendering them inaccessible. The door at the far end is slightly ajar, letting the flickering of lamp light spill into the dark hallway.
 
-&lt;div id=&#39;choices&#39;&gt;
 (if: $killedSword is false)[
 As you stealthily near the room, you begin to make out the sounds of repeated metallic clinking. You soon realize that this is the sound of swords repeatedly striking each other.
 
 Before you can investigate further, the sound of heavy dragonborn footsteps echo through the halls, rendering all your sneaking useless. By time the lumbering paladin reaches you, the noises from the room have stopped.
+&lt;br&gt;&lt;/br&gt;
 	(link: &quot;Enter the room&quot;)[(goto: &quot;Sword Boss&quot;)]]
-                
+
+&lt;div id=&#39;choices&#39;&gt;
 (link: &quot;Return downstairs&quot;)[(goto: &quot;Foyer&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="Sword Boss" tags="" position="1200,600" size="100,100">&lt;img class=&quot;right-side large&quot; src=&quot;img/sword_boss.jpg&quot; &gt;
 
@@ -482,9 +484,9 @@ He heads down the hallway to the right, and exclaims, “Well then let’s get m
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="Imp Boss" tags="" position="1050,300" size="100,100">&lt;img class=&quot;right-side large&quot; src=&quot;img/imp_boss.png&quot; &gt;
 
 =&gt;&lt;=
-As you utter the command word “LIBERTY”, the portal shrinks down to the size of your palm. As you puzzle what to do next, a familiar sense of dread overcomes you.
+As you utter the command word “LIBERTY”, the portal shrinks down to the size of your palm. While you puzzle over what to do next, a familiar sense of dread overcomes you.
 
-You hear a voice echo through your mind, “You can’t escape … no one escapes my home!” Suddenly, that same black fog that appeared earlier in the study steadily flows into the foyer from both ends of the hallway and down the symmetric stairs.
+You hear a voice echo through your mind, “&#39;&#39;You can’t escape … no one escapes my home!&#39;&#39;” Suddenly, that same black fog that appeared earlier in the study steadily flows into the foyer from both ends of the hallway and down the symmetric stairs.
 
 This time however, the smoke does not envelop you like it did Matreus, but rather coalesces into something enormous. As the smoke dissipates, you see an enormous imp standing before you. 
 
