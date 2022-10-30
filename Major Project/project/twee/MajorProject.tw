@@ -1,0 +1,30 @@
+:: StoryTitle [Special]
+    Major Project
+
+
+:: StoryData [Special]
+{
+    "ifid": "132CE458-99C1-4E73-A829-77A36409F0B5",
+    "format": "SugarCube",
+    "format-version": "2.36.1",
+    "start": "Start"
+}
+
+:: Start [Act-0]
+
+    Intro
+
+    [[Begin|Intro]]
+
+
+:: Intro [Act-1] {"position":"0,150"}
+
+    temp
+
+    [[How did I end up here?->Character Creation]]
+
+
+:: Character Creation [Act-1] {"position":"150,150"}
+
+    Name
+    (input: bind $playerName, "=X=", "")

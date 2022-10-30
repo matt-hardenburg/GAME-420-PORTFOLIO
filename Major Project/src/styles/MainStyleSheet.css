@@ -1,0 +1,15 @@
+#title
+{
+    text-decoration: underline;
+}
+
+#menu
+{
+    display: none;
+}
+
+#ui-bar-tray
+{
+    position:absolute;
+    bottom: 0;
+}

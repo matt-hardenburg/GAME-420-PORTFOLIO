@@ -1,0 +1,42 @@
+{
+  "name": "Major Project",
+  "version": "0.0.1",
+  "description": "GAME 420 Major Project",
+  "main": "build.js",
+  "scripts": {
+    "start": "cd dist && npx http-server -c0 -o",
+    "compile:src": "node build.js",
+    "compile:twee": "tweego -o dist/index.html project/twee/MajorProject.tw",
+    "build": "npm run compile:src && npm run compile:twee"
+  },
+  "keywords": [
+    "twine",
+    "tweego",
+    "twee"
+  ],
+  "author": "Matt Hardenburg",
+  "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "autoprefixer": "^10.4.7",
+    "clean-css": "^5.3.1",
+    "http-server": "^14.1.1",
+    "postcss": "^8.4.14",
+    "terser": "^5.14.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt-hardenburg/GAME-420-PORTFOLIO/tree/main/Major%20Project"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 3 versions",
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "IE >= 9",
+    "Opera >= 12"
+  ],
+  "dependencies": {
+    "fs-jetpack": "^5.1.0"
+  }
+}
