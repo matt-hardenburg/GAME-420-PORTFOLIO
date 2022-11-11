@@ -8,15 +8,16 @@
 :: StoryInit [data] {"position":"150,150"}
     <<set $IntroAct1 to false>>
     <<set $attributePoints to 10>>
-    <<set $skillPoints to 10>>
+    <<set $skillPoints to 15>>
     <<set $attributeCap to 10>>
-    <<set $skillCap to 30>>
+    <<set $skillCap to 50>>
     <<set $tookConBoost to false>>
     <<set $tookPerBoost to false>>
     <<set $tookStrBoost to false>>
     <<set $tookDexBoost to false>>
     <<set $tookIntBoost to false>>
     <<set $tookChmBoost to false>>
+    <<set $playerXP to 0>>
     <<set $playerCon to 5>> 
     <<set $playerPer to 5>> 
     <<set $playerStr to 5>>
