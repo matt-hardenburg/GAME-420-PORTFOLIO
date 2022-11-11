@@ -1,0 +1,4 @@
+:: Act1 {"position":"750,250"}
+    Ipsum
+    <<set $IntroAct1 to true>>
+    [[Back Home->Gateways]] 

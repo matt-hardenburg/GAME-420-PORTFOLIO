@@ -1,3 +1,8 @@
+:: StoryStylesheet[stylesheet]
+    body{
+        background-color: aqua;
+    }
+
 :: StoryTitle [Special]
     Major Project
 
@@ -10,19 +15,22 @@
     "start": "Start"
 }
 
+:: StoryMenu
+[[Test][$return to passage()]]
+
+:: Test
+Test container on the sidebar
+[[Return to Game | $return]]
+
 :: Start [Act-0]
 
     Intro
 
     [[Begin|Intro]]
 
-
 :: Intro [Act-1] {"position":"0,150"}
 
-    temp
-
     [[How did I end up here?->Character Creation]]
-
 
 :: Character Creation [Act-1] {"position":"150,150"}
 

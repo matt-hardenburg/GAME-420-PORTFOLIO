@@ -1,2 +1,1 @@
-@echo off
-call npm run build
+tweego -o dist/index.html project

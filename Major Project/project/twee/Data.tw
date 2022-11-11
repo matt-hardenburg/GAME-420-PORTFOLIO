@@ -1,0 +1,44 @@
+:: StoryData [data] {"position":"150,150"}
+{
+    "ifid": "397B2903-829C-4C57-99E3-CFE9342ABE67",
+    "format": "SugarCube",
+    "format-version": "2.36.1"
+}
+
+:: StoryInit [data] {"position":"150,150"}
+    <<set $IntroAct1 to false>>
+    <<set $attributePoints to 10>>
+    <<set $skillPoints to 10>>
+    <<set $attributeCap to 10>>
+    <<set $skillCap to 30>>
+    <<set $tookConBoost to false>>
+    <<set $tookPerBoost to false>>
+    <<set $tookStrBoost to false>>
+    <<set $tookDexBoost to false>>
+    <<set $tookIntBoost to false>>
+    <<set $tookChmBoost to false>>
+    <<set $playerCon to 5>> 
+    <<set $playerPer to 5>> 
+    <<set $playerStr to 5>>
+    <<set $playerDex to 5>> 
+    <<set $playerInt to 5>> 
+    <<set $playerChm to 5>>
+    <<set $playerBarter to 5>> 
+    <<set $playerMedicine to 5>> 
+    <<set $playerSpeech to 5>>
+    <<set $playerSurvival to 5>> 
+    <<set $playerCamraderie to 5>> 
+
+:: StorySubtitle [data] {"position":"150,150"}
+    v0.0.1
+
+:: StoryTitle [data] {"position":"150,150"}
+    Major Project
+
+:: StoryMenu [data] {"position":"150,150"}
+
+    [[Test]]
+
+:: Test [data] {"position":"150,150"}
+    <<return>>
+    

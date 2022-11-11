@@ -1,0 +1,36 @@
+:: MidNexus [hub] {"position":"300,550"}
+    Ipsum
+
+    [[Go Upstairs->UpperNexus]]
+    [[Go towards the Gateways->Gateways]]
+    [[Go downstairs->LowerNexus]]
+
+:: UpperNexus [hub] {"position":"300,400"}
+    [[Go downstairs->MidNexus]]
+
+:: LowerNexus [hub] {"position":"300,700"}
+    [[Go Upstairs->MidNexus]]
+
+:: Gateways [hub] {"position":"750,550"}
+    Ipsum
+
+    <<if $IntroAct1 is false>>
+    <<linkreplace "Investigate the only lit portal">>
+    Ipsum
+    [[Go through the Monarch's Portal->Act1]]
+    <</linkreplace>>
+    <<else>>
+    Lorem
+    [[Go through the Monarch's Portal->Act1]]
+    <</if>>
+
+    <<if $FinishedAct1 is true>>
+    [[Go through the Swamp Portal->Act2.a]]
+    [[Go through the Volcanic Portal->Act2.b]]
+    [[Go through the Cloud Portal->Act2.c]]
+    <</if>>
+    <<if $finishedAct3 is true>>
+    [[Go through the Icy Portal->Act3]]
+    <</if>>
+
+    [[Return to the center of the Nexus->MidNexus]]

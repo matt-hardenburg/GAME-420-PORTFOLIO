@@ -1,0 +1,32 @@
+click to move rpg with a trusty companion
+standard attributes system
+fallout style skill system?
+class based? (if time, hybrid if not)
+
+combat:
+	click to attack/cast (hold keybind to stand still)
+	can choose from 3 prepared spells
+		can select new spells in a rest zones
+		melee skills?
+	innate heal ability
+	regen health at a steady rate out of combat
+
+5 acts:
+	1: Intro and exposition
+	2: Branching path for 3 bosses/zones (2 if no time)
+	3: Climax and companion betrayal (end the threat/fake out then betrayal) 
+	4: "climb out of hell" and introspection
+	5: resolution, choice to forgive/fight
+
+Zones:
+	01: Hub
+	1: Medieval Forest
+	2.a: Swamplands
+	2.b: Volcanic activity/ on the lava
+	2.c: cloud kingdom
+	3: Icy mountain
+	4: void/hell/"the end"
+	5: travel back through each ransacked zone, and try to aid those hurt by the companion
+	6: Final boss fight in the ransacked hub
+
+
