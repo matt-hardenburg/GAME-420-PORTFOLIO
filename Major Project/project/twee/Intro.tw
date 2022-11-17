@@ -17,23 +17,24 @@
 
         <br>
         What is your background?<<set _classes = ["Justicar", "Spellblade", "Cultist"]>>
-        <br>
-        <<listbox "$class">><<optionsfrom _classes>><</listbox>>
-        &nbsp;&nbsp;
-        <span id="class-info">(nothing)</span>&nbsp;&nbsp;&nbsp;<i>Applied after character creation</i>
-        <<script>>
-            $(document).one(":passagerender", function (event) {
-                $(event.content).find("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>");
-                $(event.content).find("#listbox-class").on("change", function (event) {
-                    $("#class-info").fadeOut(250);
-                    setTimeout(function () {
-                        $("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>").fadeIn(250);
-                    }, 250);
+            <br>
+            <<listbox "$class">><<optionsfrom _classes>><</listbox>>
+            &nbsp;&nbsp;
+            <span id="class-info">(nothing)</span>&nbsp;&nbsp;&nbsp;<i>Applied after character creation</i>
+            <<script>>
+                $(document).one(":passagerender", function (event) {
+                    $(event.content).find("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>");
+                    $(event.content).find("#listbox-class").on("change", function (event) {
+                        $("#class-info").fadeOut(250);
+                        setTimeout(function () {
+                            $("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>").fadeIn(250);
+                        }, 250);
+                    });
                 });
-            });
-        <</script>>
+            <</script>>
     
         <br>
+
         <h4><u>Attributes</u> &nbsp;&nbsp; <<print "[">><span id="attributePoints">$playerCon</span> points remaining<<print "]">></h4>
             <<link "[-]">>
                     <<if $playerCon gt 1>>
@@ -320,6 +321,7 @@
                     <</if>>
                     <</link>>
     <</nobr>>
+        <br>
 
     <div id="bottomSection"><<link "I remember now">>
         <<if $attributePoints is not 0 and $skillPoints is not 0>>

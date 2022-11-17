@@ -91,14 +91,14 @@
     <</if>></nobr>
 
 :: CurrentEnemy
-    <!-- <div id="enemy">$eName: <meter @value="$eHP" min="0" max="$eMHP"></meter></div> -->
     <div id="enemy"><<showmeter 'eHP' $eHP / $eMHP>></div>
 
 
 :: Win
-    You Win!
-    <<link "Carry on" "MidNexus">>
-        <<set $playerGold to random(10, 50)>>
+    <<set $foundGold to random(10, 50)>>
+    You found <<print $foundGold>> gold!
+    <<link "Carry on" $savedPassage>>
+        <<set $playerGold to $playerGold + $foundGold>>
     <</link>>
 
 :: Lose
@@ -106,6 +106,7 @@
     <<link "That's rough" "Start">><</link>>
 
 :: eKobold
+    <<set $savedPassage to passage()>>
     <<set $eName to "Kobold">>
     <<set $eMHP to 50>>
     <<set $eHP to $eMHP>>

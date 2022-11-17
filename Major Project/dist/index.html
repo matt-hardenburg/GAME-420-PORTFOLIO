@@ -111,6 +111,11 @@ body
     font-size: medium;
 }
 
+.passage {
+    position: absolute;
+    text-align: left;
+}
+
 #objectives {
     text-align: center;
 }
@@ -418,12 +423,13 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;&lt;elseif $eHP lte 0&gt;&gt;
         &lt;&lt;goto &quot;Win&quot;&gt;&gt;
         &lt;&lt;set $inCombat to false&gt;&gt;
-    &lt;&lt;/if&gt;&gt;&lt;/nobr&gt;</tw-passagedata><tw-passagedata pid="33" name="CurrentEnemy" tags="" position="350,475" size="100,100">&lt;!-- &lt;div id=&quot;enemy&quot;&gt;$eName: &lt;meter @value=&quot;$eHP&quot; min=&quot;0&quot; max=&quot;$eMHP&quot;&gt;&lt;/meter&gt;&lt;/div&gt; --&gt;
-    &lt;div id=&quot;enemy&quot;&gt;&lt;&lt;showmeter &#39;eHP&#39; $eHP / $eMHP&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="Win" tags="" position="475,475" size="100,100">You Win!
-    &lt;&lt;link &quot;Carry on&quot; &quot;MidNexus&quot;&gt;&gt;
-        &lt;&lt;set $playerGold to random(10, 50)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;&lt;/nobr&gt;</tw-passagedata><tw-passagedata pid="33" name="CurrentEnemy" tags="" position="350,475" size="100,100">&lt;div id=&quot;enemy&quot;&gt;&lt;&lt;showmeter &#39;eHP&#39; $eHP / $eMHP&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="Win" tags="" position="475,475" size="100,100">&lt;&lt;set $foundGold to random(10, 50)&gt;&gt;
+    You found &lt;&lt;print $foundGold&gt;&gt; gold!
+    &lt;&lt;link &quot;Carry on&quot; $savedPassage&gt;&gt;
+        &lt;&lt;set $playerGold to $playerGold + $foundGold&gt;&gt;
     &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="Lose" tags="" position="600,475" size="100,100">You Lose!
-    &lt;&lt;link &quot;That&#39;s rough&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="eKobold" tags="" position="725,475" size="100,100">&lt;&lt;set $eName to &quot;Kobold&quot;&gt;&gt;
+    &lt;&lt;link &quot;That&#39;s rough&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="eKobold" tags="" position="725,475" size="100,100">&lt;&lt;set $savedPassage to passage()&gt;&gt;
+    &lt;&lt;set $eName to &quot;Kobold&quot;&gt;&gt;
     &lt;&lt;set $eMHP to 50&gt;&gt;
     &lt;&lt;set $eHP to $eMHP&gt;&gt;
     &lt;&lt;set $eAtk to &quot;Attack 1&quot;&gt;&gt;
@@ -543,23 +549,24 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
 
         &lt;br&gt;
         What is your background?&lt;&lt;set _classes = [&quot;Justicar&quot;, &quot;Spellblade&quot;, &quot;Cultist&quot;]&gt;&gt;
-        &lt;br&gt;
-        &lt;&lt;listbox &quot;$class&quot;&gt;&gt;&lt;&lt;optionsfrom _classes&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-        &amp;nbsp;&amp;nbsp;
-        &lt;span id=&quot;class-info&quot;&gt;(nothing)&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;i&gt;Applied after character creation&lt;/i&gt;
-        &lt;&lt;script&gt;&gt;
-            $(document).one(&quot;:passagerender&quot;, function (event) {
-                $(event.content).find(&quot;#class-info&quot;).empty().wiki(&quot;&lt;&lt;include &#39;Class Info &quot; + State.variables.class + &quot;&#39;&gt;&gt;&quot;);
-                $(event.content).find(&quot;#listbox-class&quot;).on(&quot;change&quot;, function (event) {
-                    $(&quot;#class-info&quot;).fadeOut(250);
-                    setTimeout(function () {
-                        $(&quot;#class-info&quot;).empty().wiki(&quot;&lt;&lt;include &#39;Class Info &quot; + State.variables.class + &quot;&#39;&gt;&gt;&quot;).fadeIn(250);
-                    }, 250);
+            &lt;br&gt;
+            &lt;&lt;listbox &quot;$class&quot;&gt;&gt;&lt;&lt;optionsfrom _classes&gt;&gt;&lt;&lt;/listbox&gt;&gt;
+            &amp;nbsp;&amp;nbsp;
+            &lt;span id=&quot;class-info&quot;&gt;(nothing)&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;i&gt;Applied after character creation&lt;/i&gt;
+            &lt;&lt;script&gt;&gt;
+                $(document).one(&quot;:passagerender&quot;, function (event) {
+                    $(event.content).find(&quot;#class-info&quot;).empty().wiki(&quot;&lt;&lt;include &#39;Class Info &quot; + State.variables.class + &quot;&#39;&gt;&gt;&quot;);
+                    $(event.content).find(&quot;#listbox-class&quot;).on(&quot;change&quot;, function (event) {
+                        $(&quot;#class-info&quot;).fadeOut(250);
+                        setTimeout(function () {
+                            $(&quot;#class-info&quot;).empty().wiki(&quot;&lt;&lt;include &#39;Class Info &quot; + State.variables.class + &quot;&#39;&gt;&gt;&quot;).fadeIn(250);
+                        }, 250);
+                    });
                 });
-            });
-        &lt;&lt;/script&gt;&gt;
+            &lt;&lt;/script&gt;&gt;
     
         &lt;br&gt;
+
         &lt;h4&gt;&lt;u&gt;Attributes&lt;/u&gt; &amp;nbsp;&amp;nbsp; &lt;&lt;print &quot;[&quot;&gt;&gt;&lt;span id=&quot;attributePoints&quot;&gt;$playerCon&lt;/span&gt; points remaining&lt;&lt;print &quot;]&quot;&gt;&gt;&lt;/h4&gt;
             &lt;&lt;link &quot;[-]&quot;&gt;&gt;
                     &lt;&lt;if $playerCon gt 1&gt;&gt;
@@ -846,6 +853,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
                     &lt;&lt;/if&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
     &lt;&lt;/nobr&gt;&gt;
+        &lt;br&gt;
 
     &lt;div id=&quot;bottomSection&quot;&gt;&lt;&lt;link &quot;I remember now&quot;&gt;&gt;
         &lt;&lt;if $attributePoints is not 0 and $skillPoints is not 0&gt;&gt;
