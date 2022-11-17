@@ -1,17 +1,14 @@
 :: MidNexus [hub] {"position":"300,550"}
     Ipsum
 
-    <div id="bottomSection">[[Go Upstairs->UpperNexus]]
-    [[Go towards the Gateways->Gateways]]
+    <<set $respawnPoint to passage()>>
+    <div id="bottomSection">[[Go towards the Gateways->Gateways]]
     <<linkreplace "Investigate the sealed doors at the base of the pillar">>
         <<if $act1Complete is not true>>
             The heavy stone doors are sealed shut with no way to open them.
         <<else>>Ipsum<br><br>[[Head downstairs->LowerNexus]]
         <</if>>
         <</linkreplace>></div>
-
-:: UpperNexus [hub] {"position":"300,400"}
-    <div id="bottomSection">[[Return downstairs->MidNexus]]</div>
 
 :: LowerNexus [hub] {"position":"300,700"}
     <div id="bottomSection">[[Return upstairs->MidNexus]]</div>
@@ -27,14 +24,6 @@
     <<else>>
     Lorem
     [[Go through the Monarch's Portal->Act1Start]]
-    <</if>></div>
+    <</if>>
 
-    <<if $FinishedAct1 is true>>
-    [[Go through the Swamp Portal->Act2.a]]
-    [[Go through the Volcanic Portal->Act2.b]]
-    [[Go through the Cloud Portal->Act2.c]]
-    <</if>>
-    <<if $finishedAct3 is true>>
-    [[Go through the Icy Portal->Act3]]
-    <</if>>
     [[Return to the center of the Nexus->MidNexus]]</div>

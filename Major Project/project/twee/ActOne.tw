@@ -13,62 +13,30 @@
     [[Head towards the Gateway->Act1Start]]</div>
 
 :: QuasitonCenter [ActOne]
-    The humble town Quasiton is abuzz with daily activity. 
-    Where should I go?
+    <div id="quasiton">The humble town Quasiton is abuzz with daily activity despite the fact that a meteor recently crashed into the town's sole shop. Where should I go?
 
     [[Head back towards the Gateway->PathToQuasiton]]
 
-    Nestled in the corner of the main marketplace is an ominous looking shop.
-    [[To the Occult Shop->Occultist]]
+    Near the crater where the shop used to be is a small stand selling potions. <<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
 
-    Near the center of the marketplace is a quaint shop with various armours arranged on stands.
-    [[To the Armorer->Armorer]]
+    A small inn sits right next to where the shop used to be, how convenient.<<set _innCost to 40 - 2*Math.round($playerBarter/2)>>
+    <<linkreplace "Rest at the inn for _innCost gold">><<if $playerGold gte _innCost>><<set $playerGold to $playerGold - _innCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a refreshing rest!</i><<else>><i>You don't seem to have enough gold...</i><</if>><</linkreplace>>
 
-    The sound of a hammer striking an anvil rings through the town, there must be a blacksmith nearby.
-    [[To the Blacksmith->Blacksmith]]
-
-    Several shady looking figures are mulling about near a decrepit looking building
-    [[To the Theive's Den->TheifDen]]
-
-    A veritable fleet of horses strapped to accompanying carriages are arranged in a line, ready to set off at a moment's notice.
-    [[Inquire about hiring a carriage->Carriages]]
+    A veritable fleet of horses strapped to accompanying carriages are arranged in a line, ready to set off at a moment's notice.<<set _carriageCost to 200 - 5*Math.round($playerBarter/2)>>
+    <<linkreplace "Hire a carriage to the castle for _carriageCost gold">><<if $playerGold gte _carriageCost>><<set $playerGold to $playerGold - _carriageCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<goto "CastleGates">><<else>><i>You don't seem to have enough gold...</i><</if>><</linkreplace>>
 
     There is a path leading out of town towards a section of woods that seems perpetually darker than the surroundings.
     [[Venture towards the Haunted Woods->GrindForest]]
 
     There is also a wide, well-trodden path leading ouyt of Quasiton into the forest. A sign stands near the exit gate reading "To the Castle".
-    [[Venture towards the Castle->Path1]]
-
-
-:: Occultist [ActOne]
-    Ipsum
-
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
-
-:: Blacksmith [ActOne]
-    Ipsum
-    
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
-
-:: Armorer [ActOne]
-    Ipsum
-    
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
-
-:: TheifDen [ActOne]
-    Ipsum
-    
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
-
-:: Carriages [ActOne]
-    Ipsum
-    
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+    [[Venture towards the Castle->Path1]]</div>
 
 :: GrindForest [ActOne]
-    Ipsum
+    <center>The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.</center>
     
-    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+    <div id="bottomSection"><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<link "Explore the Forest" "eKobold">><<set $savedPassage to passage()>><</link>><<else>><<link "Explore the Forest" "eOrc">><<set $savedPassage to passage()>><</link>><</if>>
+    [[Return to Quasiton's Center->QuasitonCenter]]</div>
 
 :: Path1 [ActOne]
     Ipsum
@@ -116,6 +84,10 @@
 
 :: CastleGates [ActOne]
     Ipsum
+
+    A lone carriage waits at the castle gates, ready to set off at a moment's notice. <<set _carriageCost to 200 - 5*Math.round($playerBarter/2)>>
+    <<linkreplace "Hire a carriage to Quasiton for _carriageCost gold">><<if $playerGold gte _carriageCost>><<set $playerGold to $playerGold - _carriageCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<goto "CastleGates">><<else>><i>You don't seem to have enough gold...</i><</if>><</linkreplace>>
+
 
     <div id="bottomSection">[[Have an audience with the King->ThroneRoom]]
     [[Leave the castle gates->Path4A]]</div>

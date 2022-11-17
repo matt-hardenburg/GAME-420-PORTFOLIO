@@ -333,12 +333,9 @@
     <</link>></div>
 
 :: CharacterExposition [intro] {"position":"0,550"}
-    <<if $playerBackground is "Justicar">>
-    <<elseif $playerBackground is "Lorem">>
-    <<elseif $playerBackground is "Sum">>
-        <</if>>
-
-        Fill me in already
+    <<if $class is "Justicar">><<set $playerCon++>><<set $playerStr++>><<set $playerBarter to $playerBarter + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Justicar background
+    <<elseif $class is "Spellblade">><<set $playerInt++>><<set $playerDex++>><<set $playerMedicine to $playerMedicine + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Spellblade background
+    <<elseif $class is "Cultist">><<set $playerLck++>><<set $playerCon++>><<set $playerSpeech to $playerSpeech + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Cultist background<</if>>
 
     <div id="bottomSection">[[What's happening to me?->NexusIntro]]</div>
 
@@ -350,7 +347,7 @@
     Justicar guy (+1 CON, +1 STR, +5 Barter)
 
 :: Class Info Spellblade {"position":"150,150"}
-    Spellblade guy (+1 INT, +1 DEX, +5 Barter)
+    Spellblade guy (+1 INT, +1 DEX, +5 Medicine)
 
 :: Class Info Cultist {"position":"150,150"}
     Cultist guy (+1 LCK, +1 CON, +5 Speech)

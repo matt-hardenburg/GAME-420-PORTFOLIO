@@ -27,7 +27,7 @@
     <<set $tookLckBoost to false>>
     <!-- Player Stats -->
     <<set $playerGold to 0>>
-    <<set $pAC to 10 + Math.round($playerDex/2)>>
+    <<set $pAC to 0>>
     <<set $playerCon to 5>> 
     <<set $playerStr to 5>>
     <<set $playerDex to 5>> 
@@ -38,20 +38,22 @@
     <<set $playerSpeech to 5>>
     <<set $playerSurvival to 5>>
     <<set $playerLooting to 5>> 
-    <<set $playerHP to 5 * $playerCon + 30>>
+    <<set $playerHP to 0>>
     <<set $playerMHP to $playerHP>>
     <!-- Meters -->
-    <<newmeter 'pHP' $playerHP/$playerMHP>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label 'HP: $playerHP / $playerMHP' 'white' center>><</newmeter>>
-    <<newmeter 'eHP' $eHP/$eMHP>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label '$eName: $eHP / $eMHP' 'white' center>><</newmeter>>
+    <<newmeter 'pHP' $playerHP/$playerMHP>><<animation 250ms>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label 'HP: $playerHP / $playerMHP' 'white' center>><</newmeter>>
+    <<newmeter 'eHP' $eHP/$eMHP>><<animation 250ms>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label '$eName: $eHP / $eMHP' 'white' center>><</newmeter>>
     <!-- Items -->
     <<consumable "Health Potion">>
-        <<set $playerHP to Math.clamp($playerHP + 20, 0, $playerMHP)>>
+        <<set $playerHP to Math.clamp($playerHP + (10 + random(1, 3) * Math.round($playerMedicine/2)), 0, $playerMHP)>>
         <<description>>\
             <<include "A somewhat diluted health potion. (Heals for 15HP)">>\
     <</consumable>>
     <!-- Inventories -->
     <<set $playerInv to Inventory.create()>>
-    <<run $playerInv.pickup("Health Potion", 5, "moreItems", 5)>>
+    <<run $playerInv.pickup("Health Potion", 3)>>
+    <<set $shopInv to Inventory.create()>>
+    <<run $shopInv.pickup("Health Potion", 10)>>
 
 :: StorySubtitle [data] {"position":"150,150"}
     v0.0.1
@@ -73,6 +75,12 @@
     [[Inventory->PlayerInventory]]
 
 :: PlayerStats [data]
+    <center>
+    <div id="stats">
+        <<print $playerName>>, the <<print $class>>
+        Bonus to Hit: +<<print Math.round($playerLck/2)>>
+        AC: <<print $playerAC>>
+    </div>
     <div id="stats">
         <b>CON:</b>  <<print $playerCon>>
         <b>STR:</b>  <<print $playerStr>>
@@ -80,17 +88,17 @@
         <b>INT:</b>  <<print $playerInt>>
         <b>LCK:</b>  <<print $playerLck>>
     </div>
-        <div id="stats">
+    <div id="stats">
         <b>Barter:</b>  <<print $playerBarter>>
         <b>Medicine:</b>  <<print $playerMedicine>>
         <b>Speech:</b>  <<print $playerSpeech>>
         <b>Survival:</b>  <<print $playerSurvival>>
         <b>Looting:</b>  <<print $playerLooting>>
-
     </div>
-        <div id="stats"><<return>></div>
+    <div id="stats"><<return>></div>
+    </center>
 
 :: PlayerInventory
-    <<inv $playerInv use, drop>>
+    <<inv $playerInv inspect, use, drop>>
     <div id="bottomSection"><<return>></div>
     
