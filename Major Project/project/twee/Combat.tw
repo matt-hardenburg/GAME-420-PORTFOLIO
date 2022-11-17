@@ -1,0 +1,120 @@
+:: Log
+    <div id="log">
+        <<if $log is "you">>
+            It is your turn.
+        <<elseif $log is "youHit">>
+            You attack with your $pAtk, dealing $pAtkDmg damage to $eName.
+        <<elseif $log is "youCrit">>
+            Critical Hit! You attack with your $pAtk, dealing $pAtkDmg damage to $eName.	
+        <<elseif $log is "youMiss">>
+            You missed!
+        <<elseif $log is "eHit">>
+            The $eName uses '$eAtk' on you, dealing $eAtkDmg damage.
+        <<elseif $log is "eCrit">>
+            Critical Hit! The $eName uses '$eAtk' on you, dealing $eAtkDmg damage.
+        <<elseif $log is "eMiss">>
+            "The $eName missed!"
+        <<else>>
+        <</if>>
+    </div>
+
+:: Combat
+    <<include "CurrentEnemy">>
+    <<include "Log">>
+    <<include "Player">>
+
+:: Player
+    <nobr>
+    <div id="player"><div id="meter"><<showmeter 'pHP' $playerHP / $playerMHP>></div></div>
+    <<set $inCombat to true>>
+    <<if $turn is "player">>
+    <div id="bottomSection">
+        <<button "Attack!">>
+            <<set $pAtk to "trusty sword">>
+                <<set _toHit to random(1,20) + 2 + Math.round($playerLck/2) >>
+                <!-- Crit -->
+                <<if _toHit is 20>>
+                    <<set $pAtkDmg to 2 * random(1,8) + 2 + Math.round($playerStr/2)>>
+                    <<set $eHP to $eHP - $pAtkDmg>>
+                    <<updatemeter 'eHP' '$eHP / $eMHP'>>
+                    <<set $log to "youCrit">>
+                    <<set $turn to "enemy">>
+                <!-- Hit -->
+                <<elseif _toHit gte $eAC>>
+                    <<set $pAtkDmg to random(1,8) + 2 + Math.round($playerStr/2)>>
+                    <<set $eHP to $eHP - $pAtkDmg>>
+                    <<updatemeter 'eHP' '$eHP / $eMHP'>>
+                    <<set $log to "youHit">>
+                    <<set $turn to "enemy">>
+                <!-- Miss -->
+                <<else>>
+                    <<set $log to "youMiss">>
+                    <<set $turn to "enemy">>
+                <</if>>
+            <<goto "Combat">>
+        <</button>> &nbsp;&nbsp;&nbsp; <<if $playerInv.has("Health Potion")>><<button "Drink a Health Potion">>
+            <<run $playerInv.use("Health Potion")>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><</button>> &nbsp; (<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span> remaining)<</if>>
+    </div>
+    <!-- Enemy Turn -->
+    <<elseif $turn is "enemy">>
+    <div id="bottomSection">
+        <<button "Continue">>
+                <<set _toHit to random(1,20)>>
+                <!-- Crit -->
+                <<if _toHit is 20>>
+                    <<set $playerHP to $playerHP - 2 * $eAtkDmg>>
+                    <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+                    <<set $log to "eCrit">>
+                    <<set $turn to "player">>
+                <!-- Hit -->
+                <<elseif _toHit gte $pAC>>
+                    <<set $playerHP to $playerHP - $eAtkDmg>>
+                    <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+                    <<set $log to "eHit">>
+                    <<set $turn to "player">>
+                <!-- Miss -->
+                <<else>>
+                    <<set $log to "eMiss">>
+                    <<set $turn to "player">>
+                <</if>> 
+            <<goto "Combat">>
+        <</button>>
+    </div>
+    <</if>>
+
+    <<if $playerHP lte 0>>
+        <<goto "Lose">>
+        <<set $inCombat to false>>
+    <<elseif $eHP lte 0>>
+        <<goto "Win">>
+        <<set $inCombat to false>>
+    <</if>></nobr>
+
+:: CurrentEnemy
+    <!-- <div id="enemy">$eName: <meter @value="$eHP" min="0" max="$eMHP"></meter></div> -->
+    <div id="enemy"><<showmeter 'eHP' $eHP / $eMHP>></div>
+
+
+:: Win
+    You Win!
+    <<link "Carry on" "MidNexus">>
+        <<set $playerGold to random(10, 50)>>
+    <</link>>
+
+:: Lose
+    You Lose!
+    <<link "That's rough" "Start">><</link>>
+
+:: eKobold
+    <<set $eName to "Kobold">>
+    <<set $eMHP to 50>>
+    <<set $eHP to $eMHP>>
+    <<set $eAtk to "Attack 1">>
+    <<set $eAtkDmg to random(1,8)>>
+    <<set $eAC to 10>>
+    <<set _coinFLip to either(1,2)>>
+    <<if _coinFlip is 1>> <<set $turn to "player">>
+    <<else>> <<set $turn to "enemy">>
+    <</if>>
+
+    [[Let's do this!->Combat]]

@@ -1,44 +1,37 @@
 :: Start [intro] {"position":"0,150"}
     Ipsum Lorem
-    [[Begin->Intro]]
+    <div id="bottomSection">[[Begin->Intro]]</div>
+    [[CombatTest->eKobold]]
     
 :: Intro [intro] {"position":"0,300"}
     Ipsum
 
-    [[How did I get here?->CharacterCreation]]
+    <div id="bottomSection">[[How did I get here?->CharacterCreation]]</div>
 
 :: CharacterCreation [intro] {"position":"0,425"}
     <<nobr>>
-        <<set _classes to ["Fighter", "Mage", "Thief"]>>
-        <<set _backgrounds to ["Ipsum", "Lorem", "Sum"]>>
-
         What is your name?
             <br>
             <<textbox "$playerName" "John Doe">>
         <br>
-        
-        <br>
-        What is your specialization?<<set _classes = ["Fighter", "Mage", "Thief"]>>
-            <br>
-            <<listbox "$class">><<optionsfrom _classes>><</listbox>>
-            &nbsp;&nbsp;
-            <span id="class-info">(nothing)</span>
-            <<script>>
-                $(document).one(":passagerender", function (event) {
-                    $(event.content).find("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>");
-                    $(event.content).find("#listbox-class").on("change", function (event) {
-                        $("#class-info").fadeOut(250);
-                        setTimeout(function () {
-                            $("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>").fadeIn(250);
-                        }, 250);
-                    });
-                });
-            <</script>>
-        <br>
 
         <br>
-        What is your background?<br><<listbox "$playerBackground">><<optionsfrom _backgrounds>><</listbox>>
+        What is your background?<<set _classes = ["Justicar", "Spellblade", "Cultist"]>>
         <br>
+        <<listbox "$class">><<optionsfrom _classes>><</listbox>>
+        &nbsp;&nbsp;
+        <span id="class-info">(nothing)</span>&nbsp;&nbsp;&nbsp;<i>Applied after character creation</i>
+        <<script>>
+            $(document).one(":passagerender", function (event) {
+                $(event.content).find("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>");
+                $(event.content).find("#listbox-class").on("change", function (event) {
+                    $("#class-info").fadeOut(250);
+                    setTimeout(function () {
+                        $("#class-info").empty().wiki("<<include 'Class Info " + State.variables.class + "'>>").fadeIn(250);
+                    }, 250);
+                });
+            });
+        <</script>>
     
         <br>
         <h4><u>Attributes</u> &nbsp;&nbsp; <<print "[">><span id="attributePoints">$playerCon</span> points remaining<<print "]">></h4>
@@ -46,73 +39,55 @@
                     <<if $playerCon gt 1>>
                         <<set $playerCon-->>
                         <<set $attributePoints++>>
-                        <<replace "#playerCon">><<print $playerCon>><</replace>>>>
+                        <<replace "#playerCon">><<print $playerCon>><</replace>>
                         <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                     <</if>>
                 <</link>>
-            &nbsp;&nbsp; Constitution: <span id="playerCon">$playerCon</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; CON: <span id="playerCon">$playerCon</span> &nbsp;&nbsp;
             <<link "[+]">>
-                    <<if $playerCon lt $attributeCap>>
+                    <<if $playerCon lt $attributeCap and $attributePoints gt 0>>
                         <<set $playerCon++>>
                         <<set $attributePoints-->>
-                        <<replace "#playerCon">><<print $playerCon>><</replace>>>>
+                        <<replace "#playerCon">><<print $playerCon>><</replace>>
                         <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                     <</if>>
-                <</link>>
+                <</link>>;&nbsp;&nbsp;<i>Increase your HP.</i>
             <br> 
-            <<link "[-]">>
-                <<if $playerPer gt 1>>
-                    <<set $playerPer-->>
-                    <<set $attributePoints++>>
-                    <<replace "#playerPer">><<print $playerPer>><</replace>>>>
-                    <<replace "#attributePoints">><<print $attributePoints>><</replace>>
-                <</if>>
-                <</link>>
-            &nbsp;&nbsp; Perception: <span id="playerPer">$playerPer</span> &nbsp;&nbsp;
-            <<link "[+]">>
-                <<if $playerPer lt $attributeCap>>
-                    <<set $playerPer++>>
-                    <<set $attributePoints-->>
-                    <<replace "#playerPer">><<print $playerPer>><</replace>>>>
-                    <<replace "#attributePoints">><<print $attributePoints>><</replace>>
-                <</if>>
-                <</link>>
-            <br>
             <<link "[-]">>
                 <<if $playerStr gt 1>>
                     <<set $playerStr-->>
                     <<set $attributePoints++>>
-                    <<replace "#playerStr">><<print $playerStr>><</replace>>>>
+                    <<replace "#playerStr">><<print $playerStr>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
                 <</link>>
-            &nbsp;&nbsp; Strength: <span id="playerStr">$playerStr</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; STR: <span id="playerStr">$playerStr</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerStr lt $attributeCap>>
+                <<if $playerStr lt $attributeCap and $attributePoints gt 0>>
                     <<set $playerStr++>>
                     <<set $attributePoints-->>
-                    <<replace "#playerStr">><<print $playerStr>><</replace>>>>
+                    <<replace "#playerStr">><<print $playerStr>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
-                <</link>>
+                <</link>>&nbsp;&nbsp;<i>Increase the strength of your hits.</i>
             <br>
             <<link "[-]">>
                 <<if $playerDex gt 1>>
                     <<set $playerDex-->>
                     <<set $attributePoints++>>
-                    <<replace "#playerDex">><<print $playerDex>><</replace>>>>
+                    <<replace "#playerDex">><<print $playerDex>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
                 <</link>>
-            &nbsp;&nbsp; Dexterity: <span id="playerDex">$playerDex</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; DEX: <span id="playerDex">$playerDex</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerDex lt $attributeCap>>
+                <<if $playerDex lt $attributeCap and $attributePoints gt 0>>
                     <<set $playerDex++>>
                     <<set $attributePoints-->>
-                    <<replace "#playerDex">><<print $playerDex>><</replace>>>>
+                    <<replace "#playerDex">><<print $playerDex>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
-                <</link>>
+                <</link>>&nbsp;&nbsp;<i>Increase your chance to not get hit</i>
             <br>
             <<link "[-]">>
                 <<if $playerInt gt 1>>
@@ -122,127 +97,127 @@
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
                 <</link>>
-            &nbsp;&nbsp; Intelligence: <span id="playerInt">$playerInt</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; INT: <span id="playerInt">$playerInt</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerInt lt $attributeCap>>
+                <<if $playerInt lt $attributeCap and $attributePoints gt 0>>
                     <<set $playerInt++>>
                     <<set $attributePoints-->>
-                    <<replace "#playerInt">><<print $playerInt>><</replace>>>>
+                    <<replace "#playerInt">><<print $playerInt>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
-                <</link>>
+                <</link>>&nbsp;&nbsp;<i>Increase the potency of your spells.</i>
             <br>
             <<link "[-]">>
-                <<if $playerChm gt 1>>
-                    <<set $playerChm-->>
+                <<if $playerLck gt 1>>
+                    <<set $playerLck-->>
                     <<set $attributePoints++>>
-                    <<replace "#playerChm">><<print $playerChm>><</replace>>>>
+                    <<replace "#playerLck">><<print $playerLck>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
             <</link>>
-            &nbsp;&nbsp; Charm: <span id="playerChm">$playerChm</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; LCK: <span id="playerLck">$playerLck</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerChm lt $attributeCap>>
-                    <<set $playerChm++>>
+                <<if $playerLck lt $attributeCap and $attributePoints gt 0>>
+                    <<set $playerLck++>>
                     <<set $attributePoints-->>
-                    <<replace "#playerChm">><<print $playerChm>><</replace>>>>
+                    <<replace "#playerLck">><<print $playerLck>><</replace>>
                     <<replace "#attributePoints">><<print $attributePoints>><</replace>>
                 <</if>>
-                <</link>>
+                <</link>>&nbsp;&nbsp;<i>Increase your chance to hit.</i>
             
         <br>
 
+        <br>
         <h4><u>Skills</u> &nbsp;&nbsp; <<print "[">><span id="skillPoints">$skillPoints</span> points remaining<<print  "]">></h4>
             <<link "[-]">>
                 <<if $playerBarter gt 5>>
                     <<set $playerBarter-->>
                     <<set $skillPoints++>>
-                    <<replace "#playerBarter">><<print $playerBarter>><</replace>>>>
+                    <<replace "#playerBarter">><<print $playerBarter>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
                 <</link>>
             &nbsp;&nbsp; Barter: <span id="playerBarter">$playerBarter</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerBarter lt $skillCap>>
+                <<if $playerBarter lt $skillCap and $skillPoints gt 0>>
                     <<set $playerBarter++>>
                     <<set $skillPoints-->>
-                    <<replace "#playerBarter">><<print $playerBarter>><</replace>>>>
+                    <<replace "#playerBarter">><<print $playerBarter>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
-                <</link>>    
+                <</link>>&nbsp;&nbsp;<i>Better prices in shops.</i>    
             <br>
                     <<link "[-]">>
                 <<if $playerMedicine gt 5>>
                     <<set $playerMedicine-->>
                     <<set $skillPoints++>>
-                    <<replace "#playerMedicine">><<print $playerMedicine>><</replace>>>>
+                    <<replace "#playerMedicine">><<print $playerMedicine>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
                 <</link>>
             &nbsp;&nbsp; Medicine: <span id="playerMedicine">$playerMedicine</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerMedicine lt $skillCap>>
+                <<if $playerMedicine lt $skillCap and $skillPoints gt 0>>
                     <<set $playerMedicine++>>
                     <<set $skillPoints-->>
-                    <<replace "#playerMedicine">><<print $playerMedicine>><</replace>>>>
+                    <<replace "#playerMedicine">><<print $playerMedicine>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
-                <</link>>
+                <</link>>&nbsp;&nbsp;<i>Increased healing from items.</i>    
             <br>
             <<link "[-]">>
                 <<if $playerSpeech gt 5>>
                     <<set $playerSpeech-->>
                     <<set $skillPoints++>>
-                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>>>
+                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
                 <</link>>
             &nbsp;&nbsp; Speech: <span id="playerSpeech">$playerSpeech</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerSpeech lt $skillCap>>
+                <<if $playerSpeech lt $skillCap and $skillPoints gt 0>>
                     <<set $playerSpeech++>>
                     <<set $skillPoints-->>
-                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>>>
+                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
-                <</link>> 
+                <</link>>&nbsp;&nbsp;<i>Easier to convince people</i>     
             <br>
             <<link "[-]">>
                 <<if $playerSurvival gt 5>>
                     <<set $playerSurvival-->>
                     <<set $skillPoints++>>
-                    <<replace "#playerSurvival">><<print $playerSurvival>><</replace>>>>
+                    <<replace "#playerSurvival">><<print $playerSurvival>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
                 <</link>>
             &nbsp;&nbsp; Survival: <span id="playerSurvival">$playerSurvival</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerSurvival lt $skillCap>>
+                <<if $playerSurvival lt $skillCap and $skillPoints gt 0>>
                     <<set $playerSurvival++>>
                     <<set $skillPoints-->>
-                    <<replace "#playerSurvival">><<print $playerSurvival>><</replace>>>>
+                    <<replace "#playerSurvival">><<print $playerSurvival>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
-                <</link>> 
-            <br>         
+                <</link>>&nbsp;&nbsp;<i>Increased out-of-combat HP regeneration</i>     
+            <br>
             <<link "[-]">>
-                <<if $playerCamraderie gt 5>>
-                    <<set $playerCamraderie-->>
+                <<if $playerLooting gt 5>>
+                    <<set $playerLooting-->>
                     <<set $skillPoints++>>
-                    <<replace "#playerCamraderie">><<print $playerCamraderie>><</replace>>>>
+                    <<replace "#playerLooting">><<print $playerLooting>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
                 <</link>>
-            &nbsp;&nbsp; Camraderie: <span id="playerCamraderie">$playerCamraderie</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; Looting: <span id="playerLooting">$playerLooting</span> &nbsp;&nbsp;
             <<link "[+]">>
-                <<if $playerCamraderie lt $skillCap>>
-                    <<set $playerCamraderie++>>
+                <<if $playerLooting lt $skillCap and $skillPoints gt 0>>
+                    <<set $playerLooting++>>
                     <<set $skillPoints-->>
-                    <<replace "#playerCamraderie">><<print $playerCamraderie>><</replace>>>>
+                    <<replace "#playerLooting">><<print $playerLooting>><</replace>>
                     <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                 <</if>>
-                <</link>>
-            <br> TBC
+                <</link>>&nbsp;&nbsp;<i>Find more gold from defeated enemies</i>     
         <!-- One Time Atribute Boosts --> 
             <br>
                 <<link "[-]">>
@@ -250,7 +225,7 @@
                         <<set $playerCon-->>
                         <<set $skillPoints++>>
                         <<set $tookConBoost to false>>
-                        <<replace "#playerCon">><<print $playerCon>><</replace>>>>
+                        <<replace "#playerCon">><<print $playerCon>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
@@ -260,127 +235,122 @@
                         <<set $playerCon++>>
                         <<set $skillPoints-->>
                         <<set $tookConBoost to true>>
-                        <<replace "#playerCon">><<print $playerCon>><</replace>>>>
+                        <<replace "#playerCon">><<print $playerCon>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
             <br>
                 <<link "[-]">>
-                    <<if $playerPer gt 1 and $tookConBoost is true>>
-                        <<set $playerPer-->>
-                        <<set $skillPoints++>>
-                        <<set $tookConBoost to false>>
-                        <<replace "#playerPer">><<print $playerPer>><</replace>>>>
-                        <<replace "#skillPoints">><<print $skillPoints>><</replace>>
-                    <</if>>
-                    <</link>>
-                &nbsp;&nbsp; One-time PER +1 &nbsp;&nbsp;
-                <<link "[+]">>
-                    <<if $playerPer lt $skillCap and $tookConBoost is false>>
-                        <<set $playerPer++>>
-                        <<set $skillPoints-->>
-                        <<set $tookConBoost to true>>
-                        <<replace "#playerPer">><<print $playerPer>><</replace>>>>
-                        <<replace "#skillPoints">><<print $skillPoints>><</replace>>
-                    <</if>>
-                    <</link>> 
-            <br>
-                <<link "[-]">>
-                    <<if $playerStr gt 1 and $tookConBoost is true>>
+                    <<if $playerStr gt 1 and $tookStrBoost is true>>
                         <<set $playerStr-->>
                         <<set $skillPoints++>>
-                        <<set $tookConBoost to false>>
-                        <<replace "#playerStr">><<print $playerStr>><</replace>>>>
+                        <<set $tookStrBoost to false>>
+                        <<replace "#playerStr">><<print $playerStr>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
                 &nbsp;&nbsp; One-time STR +1 &nbsp;&nbsp;
                 <<link "[+]">>
-                    <<if $playerStr lt $skillCap and $tookConBoost is false>>
+                    <<if $playerStr lt $skillCap and $tookStrBoost is false>>
                         <<set $playerStr++>>
                         <<set $skillPoints-->>
-                        <<set $tookConBoost to true>>
-                        <<replace "#playerStr">><<print $playerStr>><</replace>>>>
+                        <<set $tookStrBoost to true>>
+                        <<replace "#playerStr">><<print $playerStr>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
             <br>
                 <<link "[-]">>
-                    <<if $playerDex gt 1 and $tookConBoost is true>>
+                    <<if $playerDex gt 1 and $tookDexBoost is true>>
                         <<set $playerDex-->>
                         <<set $skillPoints++>>
-                        <<set $tookConBoost to false>>
-                        <<replace "#playerDex">><<print $playerDex>><</replace>>>>
+                        <<set $tookDexBoost to false>>
+                        <<replace "#playerDex">><<print $playerDex>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
                 &nbsp;&nbsp; One-time DEX +1 &nbsp;&nbsp;
                 <<link "[+]">>
-                    <<if $playerDex lt $skillCap and $tookConBoost is false>>
+                    <<if $playerDex lt $skillCap and $tookDexBoost is false>>
                         <<set $playerDex++>>
                         <<set $skillPoints-->>
-                        <<set $tookConBoost to true>>
-                        <<replace "#playerDex">><<print $playerDex>><</replace>>>>
+                        <<set $tookDexBoost to true>>
+                        <<replace "#playerDex">><<print $playerDex>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
             <br>
                 <<link "[-]">>
-                    <<if $playerInt gt 1 and $tookConBoost is true>>
+                    <<if $playerInt gt 1 and $tookIntBoost is true>>
                         <<set $playerInt-->>
                         <<set $skillPoints++>>
-                        <<set $tookConBoost to false>>
-                        <<replace "#playerInt">><<print $playerInt>><</replace>>>>
+                        <<set $tookIntBoost to false>>
+                        <<replace "#playerInt">><<print $playerInt>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
                 &nbsp;&nbsp; One-time INT +1 &nbsp;&nbsp;
                 <<link "[+]">>
-                    <<if $playerInt lt $skillCap and $tookConBoost is false>>
+                    <<if $playerInt lt $skillCap and $tookIntBoost is false>>
                         <<set $playerInt++>>
                         <<set $skillPoints-->>
-                        <<set $tookConBoost to true>>
-                        <<replace "#playerInt">><<print $playerInt>><</replace>>>>
+                        <<set $tookIntBoost to true>>
+                        <<replace "#playerInt">><<print $playerInt>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>> 
             <br>
                 <<link "[-]">>
-                    <<if $playerChm gt 1 and $tookConBoost is true>>
-                        <<set $playerChm-->>
+                    <<if $playerLck gt 1 and $tookLckBoost is true>>
+                        <<set $playerLck-->>
                         <<set $skillPoints++>>
-                        <<set $tookConBoost to false>>
-                        <<replace "#playerChm">><<print $playerChm>><</replace>>>>
+                        <<set $tookLckBoost to false>>
+                        <<replace "#playerLck">><<print $playerLck>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
-                &nbsp;&nbsp; One-time CHM +1 &nbsp;&nbsp;
+                &nbsp;&nbsp; One-time LCK +1 &nbsp;&nbsp;
                 <<link "[+]">>
-                    <<if $playerChm lt $skillCap and $tookConBoost is false>>
-                        <<set $playerChm++>>
+                    <<if $playerLck lt $skillCap and $tookLckBoost is false>>
+                        <<set $playerLck++>>
                         <<set $skillPoints-->>
-                        <<set $tookConBoost to true>>
-                        <<replace "#playerChm">><<print $playerChm>><</replace>>>>
+                        <<set $tookLckBoost to true>>
+                        <<replace "#playerLck">><<print $playerLck>><</replace>>
                         <<replace "#skillPoints">><<print $skillPoints>><</replace>>
                     <</if>>
                     <</link>>
     <</nobr>>
 
-    [[I remember now...->CharacterExposition]]
+    <div id="bottomSection"><<link "I remember now">>
+        <<if $attributePoints is not 0 and $skillPoints is not 0>>
+            <<run alert("Spend all of your points first!")>>
+        <</if>>
+        <<if $attributePoints is 0 and $skillPoints is 0>>
+            <<goto "CharacterExposition">>
+        <</if>>
+    <</link>></div>
 
 :: CharacterExposition [intro] {"position":"0,550"}
-    Ipsum
+    <<if $playerBackground is "Justicar">>
+    <<elseif $playerBackground is "Lorem">>
+    <<elseif $playerBackground is "Sum">>
+        <</if>>
 
-    [[What's happening to me?->NexusIntro]]
+        Fill me in already
+
+    <div id="bottomSection">[[What's happening to me?->NexusIntro]]</div>
 
 :: NexusIntro [intro] {"position":"150,550"}
     Ipsum
-    [[Onward! I guess?->MidNexus]]
+    <div id="bottomSection">[[Onward! I guess?->MidNexus]]</div>
 
-:: Class Info Fighter {"position":"150,150"}
-    A stalwart warrior
-:: Class Info Mage {"position":"150,150"}
-    A brilliant spellcaster
-:: Class Info Thief {"position":"150,150"}
-    A mischevious Trickster
-:: Class Info undefined {"position":"150,150"}
+:: Class Info Justicar {"position":"150,150"}
+    Justicar guy (+1 CON, +1 STR, +5 Barter)
+
+:: Class Info Spellblade {"position":"150,150"}
+    Spellblade guy (+1 INT, +1 DEX, +5 Barter)
+
+:: Class Info Cultist {"position":"150,150"}
+    Cultist guy (+1 LCK, +1 CON, +5 Speech)
+
+:: Background Info undefined {"position":"150,150"}

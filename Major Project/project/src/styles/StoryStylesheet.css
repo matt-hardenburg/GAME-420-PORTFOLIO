@@ -9,3 +9,129 @@ body
 {
     font-size: medium;
 }
+
+#objectives {
+    text-align: center;
+}
+
+#story-caption {
+    position: fixed;
+    bottom: 60%;
+    width: 12%;
+}
+
+#menu-story {
+    position: fixed;
+    width: 12%;
+    bottom: 30%;
+}
+
+#menu-core {
+    position: fixed;
+    bottom: 1em;
+    width: 12%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+#goldOwned {
+    color: goldenrod;
+    font-weight: bold;
+    ;
+}
+
+#log {
+    text-align: center;
+}
+
+#enemy {
+    width: auto;
+    position: center;
+    padding: 1em;
+    border: solid #000 0.05em;
+    border-radius: 0.1em;
+    background-color: #EBE;
+    font-size: 1.5rem;
+    color: #000;
+    text-align: center;
+    box-shadow: #000 0.5em 0.5em 0;
+}
+
+#player {
+    width: auto;
+    position: center;
+    padding: 1em;
+    border: solid #000 0.05em;
+    border-radius: 0.1em;
+    background-color: #B0E0E6;
+    font-size: 1.5rem;
+    color: #000;
+    text-align: center;
+    box-shadow: #000 0.5em 0.5em 0;
+}
+
+#meter {
+    border: #000;
+    border-radius: 2%;
+}
+
+#combatButtons {
+    display: inline-block;
+    align-items: center;
+}
+
+.macro-button {
+    background-color: royal_blue;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.macro-button:hover {
+    background-color: #5992EA;
+}
+
+.button:hover {
+    background-color: #f1f1f1;
+}
+
+#stats {
+    border-top: 2px #eee solid;
+    text-align: center;
+}
+
+#bottomSection {
+    background-color: rgba(22, 22, 21, 1);
+    position: fixed;
+    text-align: center;
+    border-top: 2px #eee solid;
+    padding: 1em 12em;
+    margin-top: .5em;
+    margin-bottom: 0em;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    overflow: auto;
+}
+
+#combatSection {
+    text-align: center;
+    border-top: 2px #eee solid;
+    padding: 1em 12em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    overflow: auto;
+}
