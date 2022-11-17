@@ -6,29 +6,52 @@
 }
 
 :: StoryInit [data] {"position":"150,150"}
+    <<script>>Config.history.maxStates = 1;<</script>>
+    <!-- Story Variables -->
+    <<set $currentObjective to "???">>
+    <<set $inCombat to false>>
     <<set $IntroAct1 to false>>
+    <<set $act1complete to false>>
+    <!-- LevelUp Variables -->
+    <<set $levelUpReady to false>>
+    <<set $levelThresholds to [0, 500, 750, 1000]>>
+    <<set $skillPointsGain to 10>>
     <<set $attributePoints to 10>>
     <<set $skillPoints to 15>>
     <<set $attributeCap to 10>>
     <<set $skillCap to 50>>
     <<set $tookConBoost to false>>
-    <<set $tookPerBoost to false>>
     <<set $tookStrBoost to false>>
     <<set $tookDexBoost to false>>
     <<set $tookIntBoost to false>>
-    <<set $tookChmBoost to false>>
-    <<set $playerXP to 0>>
+    <<set $tookLckBoost to false>>
+    <!-- Player Stats -->
+    <<set $playerGold to 0>>
+    <<set $pAC to 10 + Math.round($playerDex/2)>>
     <<set $playerCon to 5>> 
-    <<set $playerPer to 5>> 
     <<set $playerStr to 5>>
     <<set $playerDex to 5>> 
     <<set $playerInt to 5>> 
-    <<set $playerChm to 5>>
+    <<set $playerLck to 5>>
     <<set $playerBarter to 5>> 
     <<set $playerMedicine to 5>> 
     <<set $playerSpeech to 5>>
-    <<set $playerSurvival to 5>> 
-    <<set $playerCamraderie to 5>> 
+    <<set $playerSurvival to 5>>
+    <<set $playerLooting to 5>> 
+    <<set $playerHP to 5 * $playerCon + 30>>
+    <<set $playerMHP to $playerHP>>
+    <!-- Meters -->
+    <<newmeter 'pHP' $playerHP/$playerMHP>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label 'HP: $playerHP / $playerMHP' 'white' center>><</newmeter>>
+    <<newmeter 'eHP' $eHP/$eMHP>><<colors 'green' 'red' 'black'>><<sizing auto 200%>><<label '$eName: $eHP / $eMHP' 'white' center>><</newmeter>>
+    <!-- Items -->
+    <<consumable "Health Potion">>
+        <<set $playerHP to Math.clamp($playerHP + 20, 0, $playerMHP)>>
+        <<description>>\
+            <<include "A somewhat diluted health potion. (Heals for 15HP)">>\
+    <</consumable>>
+    <!-- Inventories -->
+    <<set $playerInv to Inventory.create()>>
+    <<run $playerInv.pickup("Health Potion", 5, "moreItems", 5)>>
 
 :: StorySubtitle [data] {"position":"150,150"}
     v0.0.1
@@ -36,10 +59,38 @@
 :: StoryTitle [data] {"position":"150,150"}
     Major Project
 
+:: StoryCaption [data]
+    <<if not $inCombat>><<showmeter 'pHP' $playerHP / $playerMHP>><</if>>
+    <div id="goldOwned">Gold: $playerGold</div>
+
+    <div id="objectives">
+    <strong><u>Objectives:</u></strong>
+    <<print $currentObjective>>
+    </div>
+
 :: StoryMenu [data] {"position":"150,150"}
+    [[Stats->PlayerStats]]
+    [[Inventory->PlayerInventory]]
 
-    [[Test]]
+:: PlayerStats [data]
+    <div id="stats">
+        <b>CON:</b>  <<print $playerCon>>
+        <b>STR:</b>  <<print $playerStr>>
+        <b>DEX:</b>  <<print $playerDex>>
+        <b>INT:</b>  <<print $playerInt>>
+        <b>LCK:</b>  <<print $playerLck>>
+    </div>
+        <div id="stats">
+        <b>Barter:</b>  <<print $playerBarter>>
+        <b>Medicine:</b>  <<print $playerMedicine>>
+        <b>Speech:</b>  <<print $playerSpeech>>
+        <b>Survival:</b>  <<print $playerSurvival>>
+        <b>Looting:</b>  <<print $playerLooting>>
 
-:: Test [data] {"position":"150,150"}
-    <<return>>
+    </div>
+        <div id="stats"><<return>></div>
+
+:: PlayerInventory
+    <<inv $playerInv use, drop>>
+    <div id="bottomSection"><<return>></div>
     

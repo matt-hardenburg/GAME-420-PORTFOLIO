@@ -1,4 +1,143 @@
-:: Act1 {"position":"750,250"}
-    Ipsum
+:: Act1Start [ActOne] {"position":"750,250"}
+    You emerge from the portal to the sounds of chirping birds carried by a gentle breeze. 
+    As your vision adjusts, you notice a forrest surrounding you. There is only one clear path leading away from the portal.
     <<set $IntroAct1 to true>>
-    [[Back Home->Gateways]] 
+
+    <div id="bottomSection">[[Venture Forth->PathToQuasiton]]
+    [[Back Home->Gateways]]</div>
+
+:: PathToQuasiton [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Venture Forth->QuasitonCenter]]
+    [[Head towards the Gateway->Act1Start]]</div>
+
+:: QuasitonCenter [ActOne]
+    The humble town Quasiton is abuzz with daily activity. 
+    Where should I go?
+
+    [[Head back towards the Gateway->PathToQuasiton]]
+
+    Nestled in the corner of the main marketplace is an ominous looking shop.
+    [[To the Occult Shop->Occultist]]
+
+    Near the center of the marketplace is a quaint shop with various armours arranged on stands.
+    [[To the Armorer->Armorer]]
+
+    The sound of a hammer striking an anvil rings through the town, there must be a blacksmith nearby.
+    [[To the Blacksmith->Blacksmith]]
+
+    Several shady looking figures are mulling about near a decrepit looking building
+    [[To the Theive's Den->TheifDen]]
+
+    A veritable fleet of horses strapped to accompanying carriages are arranged in a line, ready to set off at a moment's notice.
+    [[Inquire about hiring a carriage->Carriages]]
+
+    There is a path leading out of town towards a section of woods that seems perpetually darker than the surroundings.
+    [[Venture towards the Haunted Woods->GrindForest]]
+
+    There is also a wide, well-trodden path leading ouyt of Quasiton into the forest. A sign stands near the exit gate reading "To the Castle".
+    [[Venture towards the Castle->Path1]]
+
+
+:: Occultist [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: Blacksmith [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: Armorer [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: TheifDen [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: Carriages [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: GrindForest [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: Path1 [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Venture Right->Path2A]]
+    [[Venture Left->Path2B]]
+    [[Return to Quasiton's Center->QuasitonCenter]]</div>
+
+:: Path2A [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Venture Forth->Path3C]]
+    [[Venture back the way you came->Path1]]</div>
+
+:: Path2B [ActOne]
+    Ipsum
+    
+    <div id="bottomSection">[[Venture Right->Path3A]]
+    [[Venture Left->Path3B]]
+    [[Venture back the way you came->Path1]]</div>
+
+:: Path3A [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Venture back the way you came->Path2B]]</div>
+
+:: Path3B [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Venture Forth->Path4A]]
+    [[Venture back the way you came->Path2B]]</div>
+
+:: Path3C [ActOne]
+    Rest Shrine
+
+    <div id="bottomSection">[[Venture Forth->Path4A]]
+    [[Venture back the way you came->Path2A]]</div>
+
+:: Path4A [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Head towards the castle gates->CastleGates]]
+    [[Venture back to the shrine->Path3C]]
+    [[Venture back into the woods leading towards Quasiton->Path3B]]</div>
+
+:: CastleGates [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Have an audience with the King->ThroneRoom]]
+    [[Leave the castle gates->Path4A]]</div>
+
+:: ThroneRoom [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Return to the castle gates->CastleGates]]</div>
+
+:: CastleVaults [ActOne]
+
+:: CastleBoss [ActOne]
+
+:: Runestone [ActOne]
+
+:: Path5A [ActOne]
+    Ipsum
+
+    <div id="bottomSection">[[Return to the Castle Gates->CastleGates]]</div>
+
+:: Path5B [ActOne]
+
+:: Path5C [ActOne]
+
+:: Vermeillon [ActOne]

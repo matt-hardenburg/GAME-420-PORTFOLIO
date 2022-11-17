@@ -1,28 +1,33 @@
 :: MidNexus [hub] {"position":"300,550"}
     Ipsum
 
-    [[Go Upstairs->UpperNexus]]
+    <div id="bottomSection">[[Go Upstairs->UpperNexus]]
     [[Go towards the Gateways->Gateways]]
-    [[Go downstairs->LowerNexus]]
+    <<linkreplace "Investigate the sealed doors at the base of the pillar">>
+        <<if $act1Complete is not true>>
+            The heavy stone doors are sealed shut with no way to open them.
+        <<else>>Ipsum<br><br>[[Head downstairs->LowerNexus]]
+        <</if>>
+        <</linkreplace>></div>
 
 :: UpperNexus [hub] {"position":"300,400"}
-    [[Go downstairs->MidNexus]]
+    <div id="bottomSection">[[Return downstairs->MidNexus]]</div>
 
 :: LowerNexus [hub] {"position":"300,700"}
-    [[Go Upstairs->MidNexus]]
+    <div id="bottomSection">[[Return upstairs->MidNexus]]</div>
 
 :: Gateways [hub] {"position":"750,550"}
     Ipsum
 
-    <<if $IntroAct1 is false>>
+    <div id="bottomSection"><<if $IntroAct1 is false>>
     <<linkreplace "Investigate the only lit portal">>
     Ipsum
-    [[Go through the Monarch's Portal->Act1]]
+    [[Go through the Monarch's Portal->Act1Start]]
     <</linkreplace>>
     <<else>>
     Lorem
-    [[Go through the Monarch's Portal->Act1]]
-    <</if>>
+    [[Go through the Monarch's Portal->Act1Start]]
+    <</if>></div>
 
     <<if $FinishedAct1 is true>>
     [[Go through the Swamp Portal->Act2.a]]
@@ -32,5 +37,4 @@
     <<if $finishedAct3 is true>>
     [[Go through the Icy Portal->Act3]]
     <</if>>
-
-    [[Return to the center of the Nexus->MidNexus]]
+    [[Return to the center of the Nexus->MidNexus]]</div>
