@@ -10,9 +10,26 @@ body
     font-size: medium;
 }
 
-.passage {
+#passage {
+    top: 0;
+    left: calc(100%-280px);
     position: absolute;
-    text-align: left;
+    margin: 2%;
+    width: auto;
+    margin: 5%;
+}
+
+#passage-combat {
+    width: auto;
+}
+
+#passage-playerstats {
+    width: 60%;
+    position: absolute;;
+}
+
+#quasiton {
+    margin-bottom: 2%;
 }
 
 #objectives {
@@ -43,16 +60,21 @@ body
 #goldOwned {
     color: goldenrod;
     font-weight: bold;
-    ;
 }
 
 #log {
+    position: fixed;
+    top: 25%;
+    width: 45%;
     text-align: center;
 }
 
 #enemy {
-    width: auto;
-    position: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 45%;
+    top: 5%;
+    position: fixed;
     padding: 1em;
     border: solid #000 0.05em;
     border-radius: 0.1em;
@@ -64,8 +86,11 @@ body
 }
 
 #player {
-    width: auto;
-    position: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 45%;
+    top: 45%;
+    position: fixed;
     padding: 1em;
     border: solid #000 0.05em;
     border-radius: 0.1em;
@@ -74,11 +99,6 @@ body
     color: #000;
     text-align: center;
     box-shadow: #000 0.5em 0.5em 0;
-}
-
-#meter {
-    border: #000;
-    border-radius: 2%;
 }
 
 #combatButtons {
@@ -121,9 +141,10 @@ body
     padding: 1em 12em;
     margin-top: .5em;
     margin-bottom: 0em;
-    bottom: 0;
     right: 0;
     left: 0;
+    bottom: 0;
+    width: auto;
     height: auto;
     overflow: auto;
 }
