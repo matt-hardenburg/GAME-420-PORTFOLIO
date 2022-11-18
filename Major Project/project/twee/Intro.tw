@@ -1,7 +1,6 @@
 :: Start [intro] {"position":"0,150"}
-    Ipsum Lorem
+    <div id="formattedText">Ipsum Lorem</div>
     <div id="bottomSection">[[Begin->Intro]]</div>
-    [[CombatTest->eKobold]]
     
 :: Intro [intro] {"position":"0,300"}
     Ipsum
@@ -341,7 +340,9 @@
 
 :: NexusIntro [intro] {"position":"150,550"}
     Ipsum
-    <div id="bottomSection">[[Onward! I guess?->MidNexus]]</div>
+
+
+    <div id="bottomSection"><<link "Onward! I guess?" "MidNexus">><<set $currentObjective to "Find the Monarch's Runestone">><<replace "#objectives">><<print $currentObjective>><</replace>><</link>></div>
 
 :: Class Info Justicar {"position":"150,150"}
     Justicar guy (+1 CON, +1 STR, +5 Barter)

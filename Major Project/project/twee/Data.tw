@@ -9,6 +9,7 @@
     <<script>>Config.history.maxStates = 1;<</script>>
     <!-- Story Variables -->
     <<set $currentObjective to "???">>
+    <<set $firstQuestState to "a">>
     <<set $inCombat to false>>
     <<set $IntroAct1 to false>>
     <<set $act1complete to false>>
@@ -65,15 +66,13 @@
     <<if not $inCombat>><<showmeter 'pHP' $playerHP / $playerMHP>><</if>>
     <div id="goldOwned">Gold: $playerGold</div>
 
-    <div id="objectives">
-    <strong><u>Objectives:</u></strong>
-    <<print $currentObjective>>
-    </div>
+
+    <center><strong><u>Objectives:</u></strong></center>
+    <div id="objectives"><<print $currentObjective>></div>
 
 :: StoryMenu [data] {"position":"150,150"}
-    [[Stats->PlayerStats]]
-    [[Inventory->PlayerInventory]]
-
+    <<link "Stats" "PlayerStats">><<set $preMenu1 to passage()>><</link>>
+    <<link "Inventory" "PlayerInventory">><<set $preMenu2 to passage()>><</link>>
 :: PlayerStats [data]
     <center>
     <div id="stats">
@@ -95,10 +94,17 @@
         <b>Survival:</b>  <<print $playerSurvival>>
         <b>Looting:</b>  <<print $playerLooting>>
     </div>
-    <div id="stats"><<return>></div>
+    <div id="stats"><<if $preMenu1 is "PlayerInventory">><<link "Return" $preMenu2>><</link>><<else>><<link "Return" $preMenu1>><</link>><</if>></div>
     </center>
 
 :: PlayerInventory
     <<inv $playerInv inspect, use, drop>>
-    <div id="bottomSection"><<return>></div>
+    <div id="bottomSection"><<if $preMenu2 is "PlayerStats">><<link "Return" $preMenu1>><</link>><<else>><<link "Return" $preMenu2>><</link>><</if>></div>
     
+
+:: MyWidgets [widget]
+    <<widget "passiveHeal">>
+        <<if $inCombat is false>>
+            <<set $playerHP to Math.clamp($playerHP + Math.round($playerSurvival/2), 0, $playerMHP)>>            
+        <</if>>
+    <</widget>>

@@ -212,8 +212,7 @@
     After defeating the <<print $eName>>, you found <<print $foundGold>> gold!
     <<set _potionReward to random(1,20)>>
     <<if _potionReward gte 12>> You also found a health potion! <<run $playerInv.pickup("Health Potion", 1)>>
-    <<else>>       
-    <</if>>
+    <<else>><</if>><<set $enemiesKilled to Math.clamp($enemiesKilled + 1, 0, $enemiesNeeded)>><<replace "#objectives">><<print $currentObjective>><</replace>>
 
     <div id="bottomSection"><<link "Carry on" $savedPassage>>
         <<set $playerGold to $playerGold + $foundGold>>

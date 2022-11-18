@@ -1,29 +1,29 @@
 :: MidNexus [hub] {"position":"300,550"}
-    Ipsum
-
+    <<nobr>>Ipsum
+    <<passiveHeal>>
     <<set $respawnPoint to passage()>>
     <div id="bottomSection">[[Go towards the Gateways->Gateways]]
-    <<linkreplace "Investigate the sealed doors at the base of the pillar">>
+    <br><<linkreplace "Investigate the sealed doors at the base of the pillar">>
         <<if $act1Complete is not true>>
             The heavy stone doors are sealed shut with no way to open them.
         <<else>>Ipsum<br><br>[[Head downstairs->LowerNexus]]
         <</if>>
-        <</linkreplace>></div>
+        <</linkreplace>></div><</nobr>>
 
 :: LowerNexus [hub] {"position":"300,700"}
-    <div id="bottomSection">[[Return upstairs->MidNexus]]</div>
+    <<nobr>><<passiveHeal>><div id="bottomSection">[[Return upstairs->MidNexus]]</div><</nobr>>
 
 :: Gateways [hub] {"position":"750,550"}
-    Ipsum
-
+    <<nobr>><center>In this chamber stands many Gateways. However, all but one are shattered.</center>
+    <br>
     <div id="bottomSection"><<if $IntroAct1 is false>>
     <<linkreplace "Investigate the only lit portal">>
-    Ipsum
-    [[Go through the Monarch's Portal->Act1Start]]
+    The portal activates at your touch and seems to beckon you inside.
+    <br>[[Go through the Monarch's Portal->Act1Start]]
     <</linkreplace>>
     <<else>>
-    Lorem
-    [[Go through the Monarch's Portal->Act1Start]]
+    The last survivng portal remains active.
+    <br>[[Go through the Monarch's Portal->Act1Start]]
     <</if>>
-
-    [[Return to the center of the Nexus->MidNexus]]</div>
+    <br>
+    <br>[[Return to the center of the Nexus->MidNexus]]</div><</nobr>>
