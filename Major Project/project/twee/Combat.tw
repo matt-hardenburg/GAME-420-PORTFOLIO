@@ -215,7 +215,7 @@
 :: Win
     <<if $eName is "Shadow">><<goto "EndCard">><</if>>
     <<if $instaKill is true>>You claimed their soul for the Forbidden One!<br><<set $instaKill to false>><</if>><<set $foundGold to random(5, 20) + 2 * $playerLooting>>
-    After defeating the <<print $eName>>, you found <<print $foundGold>> gold!
+    After defeating the <<print $eName>>, you found <<print $foundGold>> gold!<<if $path is "bad">><br>You place a dynamite charge near where the $eName fell.<</if>>
     <<set _potionReward to random(1,20)>>
     <<if _potionReward gte 12>> You also found a health potion! <<run $playerInv.pickup("Health Potion", 1)>>
     <<else>><</if>><<set $badLuckProtection to true>><<set $enemiesKilled to Math.clamp($enemiesKilled + 1, 0, $enemiesNeeded)>><<replace "#objectives">><<print $currentObjective>><</replace>>
