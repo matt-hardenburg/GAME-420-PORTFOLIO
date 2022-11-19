@@ -1,9 +1,12 @@
 :: Start [intro] {"position":"0,150"}
-    <div id="formattedText">Ipsum Lorem</div>
+    <b><u>Ipsum</u></b>
+
+    <<nobr>><div id="imgDiv">
+<img src="assets/intro_1.jpeg"></div><</nobr>>
     <div id="bottomSection">[[Begin->Intro]]</div>
     
 :: Intro [intro] {"position":"0,300"}
-    Ipsum
+    Man I diededed...
 
     <div id="bottomSection">[[How did I get here?->CharacterCreation]]</div>
 
@@ -166,24 +169,6 @@
                 <</link>>&nbsp;&nbsp;<i>Increased healing from items.</i>    
             <br>
             <<link "[-]">>
-                <<if $playerSpeech gt 5>>
-                    <<set $playerSpeech-->>
-                    <<set $skillPoints++>>
-                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>
-                    <<replace "#skillPoints">><<print $skillPoints>><</replace>>
-                <</if>>
-                <</link>>
-            &nbsp;&nbsp; Speech: <span id="playerSpeech">$playerSpeech</span> &nbsp;&nbsp;
-            <<link "[+]">>
-                <<if $playerSpeech lt $skillCap and $skillPoints gt 0>>
-                    <<set $playerSpeech++>>
-                    <<set $skillPoints-->>
-                    <<replace "#playerSpeech">><<print $playerSpeech>><</replace>>
-                    <<replace "#skillPoints">><<print $skillPoints>><</replace>>
-                <</if>>
-                <</link>>&nbsp;&nbsp;<i>Easier to convince people</i>     
-            <br>
-            <<link "[-]">>
                 <<if $playerSurvival gt 5>>
                     <<set $playerSurvival-->>
                     <<set $skillPoints++>>
@@ -332,14 +317,28 @@
     <</link>></div>
 
 :: CharacterExposition [intro] {"position":"0,550"}
-    <<if $class is "Justicar">><<set $playerCon++>><<set $playerStr++>><<set $playerBarter to $playerBarter + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Justicar background
-    <<elseif $class is "Spellblade">><<set $playerInt++>><<set $playerDex++>><<set $playerMedicine to $playerMedicine + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Spellblade background
-    <<elseif $class is "Cultist">><<set $playerLck++>><<set $playerCon++>><<set $playerSpeech to $playerSpeech + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>Cultist background<</if>>
+    <<nobr>>
+        <<if $class is "Justicar">>
+            <<set $playerCon++>><<set $playerStr++>><<set $playerBarter to $playerBarter + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+            Justicar background
+            <br>Fill me in!
+        <<elseif $class is "Spellblade">>
+            <<set $playerInt++>><<set $playerDex++>><<set $playerMedicine to $playerMedicine + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+            Spellblade background
+            <br>Fill me in!
+        <<elseif $class is "Cultist">>
+            <<set $playerLck++>><<set $playerCon++>><<set $playerSpeech to $playerSpeech + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+            Cultist background
+            <br>Fill me in!
+        <</if>>
+    <br><br>
+    Rest of the expostion...
+    <</nobr>>
 
     <div id="bottomSection">[[What's happening to me?->NexusIntro]]</div>
 
 :: NexusIntro [intro] {"position":"150,550"}
-    Ipsum
+    Deja vu...
 
 
     <div id="bottomSection"><<link "Onward! I guess?" "MidNexus">><<set $currentObjective to "Find the Monarch's Runestone">><<replace "#objectives">><<print $currentObjective>><</replace>><</link>></div>

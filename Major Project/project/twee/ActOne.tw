@@ -1,21 +1,16 @@
 :: Act1Start [ActOne] {"position":"750,250"}
-    <<nobr>><center>You emerge from the portal to the sounds of chirping birds carried by a gentle breeze. 
-    As your vision adjusts, you notice the surrounding forest. There is but one clear path leading from the portal.</center>
+    <<nobr>>You emerge from the portal to the sounds of chirping birds carried by a gentle breeze. 
+    As your vision adjusts, you notice the surrounding forest. There is but one clear path leading from the portal.
     <<set $IntroAct1 to true>>
 
-    <div id="bottomSection">[[Venture Forth->PathToQuasiton]]
-    <br>[[Back Home->Gateways]]</div><</nobr>>
-
-:: PathToQuasiton [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
-
     <div id="bottomSection">[[Venture Forth->QuasitonCenter]]
-    <br>[[Head towards the Gateway->Act1Start]]</div><</nobr>>
+    <br>[[Back Home->Gateways]]</div><</nobr>>
 
 :: QuasitonCenter [ActOne]
     <<nobr>><div id="quasiton">
-    The humble town Quasiton is abuzz with daily activity despite the fact that a meteor recently crashed into the town's sole shop. Where should I go?
-    <<passiveHeal>>
+    Following the path from the portal, leads to the humble town Quasiton.
+    <br><br>The townis abuzz with daily activity despite the fact that a meteor recently crashed into the town's sole shop. Where should I go?
+    <<passiveHeal>><<set $badLuckProtection to false>>
     [[Head back towards the Gateway->PathToQuasiton]]
     <br>
     <br>
@@ -39,103 +34,262 @@
     <br>[[Venture towards the Castle->Path1]]</div><</nobr>>
 
 :: GrindForest [ActOne]
-    <<nobr>><center><<passiveHeal>>The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.</center>
+    <<nobr>><<passiveHeal>>The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.
     
     <div id="bottomSection"><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<link "Explore the Forest" "eKobold">><<set $savedPassage to passage()>><</link>><<else>><<link "Explore the Forest" "eOrc">><<set $savedPassage to passage()>><</link>><</if>>
     <br>[[Return to Quasiton's Center->QuasitonCenter]]</div><</nobr>>
 
 :: Path1 [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 1
     
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Venture Right->Path2A]]
     <br>[[Venture Left->Path2B]]
     <br>[[Return to Quasiton's Center->QuasitonCenter]]</div><</nobr>>
 
 :: Path2A [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 2A
 
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Venture Forth->Path3C]]
     <br>[[Venture back the way you came->Path1]]</div><</nobr>>
 
 :: Path2B [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 2B
     
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Venture Right->Path3A]]
     <br>[[Venture Left->Path3B]]
     <br>[[Venture back the way you came->Path1]]</div><</nobr>>
 
 :: Path3A [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 3A
 
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Venture back the way you came->Path2B]]</div><</nobr>>
 
 :: Path3B [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 3B
 
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Venture Forth->Path4A]]
     <br>[[Venture back the way you came->Path2B]]</div><</nobr>>
 
 :: Path3C [ActOne]
-    <<nobr>><<passiveHeal>><center>A large white obelisk at the center of a small pond stands out amidst the surrounding forest.<<set $foundShrine to true>>
-    <br><<linkreplace "Rest at the shrine">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a refreshing rest!</i><</linkreplace>></center>
+    <<nobr>><<passiveHeal>>A large white obelisk at the center of a small pond stands out amidst the surrounding forest.<<set $foundShrine to true>>
+    <br><<linkreplace "Rest at the shrine">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a refreshing rest!</i><</linkreplace>>
     <div id="bottomSection">[[Venture Forth->Path4A]]
     <br>[[Venture back the way you came->Path2A]]</div><</nobr>>
 
 :: Path4A [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum 4A
 
+    <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Head towards the castle gates->CastleGates]]
     <<if $foundShrine is true>><br>[[Venture back to the shrine->Path3C]]<</if>>
     <br>[[Venture back into the woods leading towards Quasiton->Path3B]]</div><</nobr>>
 
 :: CastleGates [ActOne]
-    <<nobr>><<passiveHeal>>Ipsum
+    <<nobr>>Ipsum
+    <br>
+    <br>A lone carriage waits at the castle gates, ready to set off at a moment's notice. <<set _carriageCost to 200 - 5*Math.round($playerBarter/2)>>
+    <br><<linkreplace "Hire a carriage to Quasiton for _carriageCost gold">><<if $playerGold gte _carriageCost>><<set $playerGold to $playerGold - _carriageCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<goto "QuasitonCenter">><<else>><i>You don't seem to have enough gold...</i><</if>><</linkreplace>>
 
-    A lone carriage waits at the castle gates, ready to set off at a moment's notice. <<set _carriageCost to 200 - 5*Math.round($playerBarter/2)>>
-    <br><<linkreplace "Hire a carriage to Quasiton for _carriageCost gold">><<if $playerGold gte _carriageCost>><<set $playerGold to $playerGold - _carriageCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<goto "CastleGates">><<else>><i>You don't seem to have enough gold...</i><</if>><</linkreplace>>
-
-
-    <div id="bottomSection">[[Have an audience with the King->ThroneRoom]]
-    <br>[[Leave the castle gates->Path4A]]</div><</nobr>>
+    <<passiveHeal>>
+    <div id="bottomSection">[[Have an audience with the King->ThroneRoom]]<br><<if $secondQuestState is "b">>[[Leave the castle gates for Vermeillon->Path5A]]<</if>><br>[[Leave the castle gates for Quasiton->Path4A]]</div><</nobr>>
 
 <!-- First quest:
                     a = start
-                    b = in progress
-                    c = finished
+                    b = go kill
+                    c = finished quest
+                    d = done
                     
      Second Quest 
-                    a = start -->
+                    a = start
+                    b = go to vermeillon
+                    c = vermeillon choice
+                    d = back to monarch
+                    e = go to vaults 
+                    f = done-->
 
 :: ThroneRoom [ActOne]
-    <<nobr>>Ipsum
-    <<passiveHeal>>
-    
-    <br><<if $firstQuestState is "a">><<linkreplace "Inquire about the Monarch's Runestone">>"I can't just let anyone have it! Prove to me that you have the kingdom's best interests at heart first and then we'll talk."<<set $enemiesKilled to 0>><<set $enemiesNeeded to 5>><<set $currentObjective to "Defeat enemies of the kingdom<br>$enemiesKilled / $enemiesNeeded">><<replace "#objectives">><<print $currentObjective>><</replace>><<set $firstQuestState to "b">><</linkreplace>><<elseif $firstQuestState is "b">>"Have you taken care of the foul creatures yet?<br><<linkreplace "Of Course">><<if $enemiesKilled is $enemiesNeeded>><<set $playerGold to $playerGold + 100>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>>The monarch responds, "Well done! I have another task for you, come back later and I'll have everything ready for you."<<set $firstQuestState to "c">><<set $currentObjective to "Meet with the monarch later today">><<replace "#objectives">><<print $currentObjective>><</replace>><<else>>The monarch angrily exclaims, "You obviously haven't! Get back out there or you won't ever see that Runestone!"<</if>><</linkreplace>><</if>>
+    <<nobr>>
+        Directly connected to the entrance to the castle is the monarch's throne room. Here the monarch graciously attends to his loving subjects.<br><br>Sitting in the throne at the far wall is the monarch.
+        <br>    
+        <br><<if $firstQuestState is "a">><<linkreplace "Inquire about the Monarch's Runestone">><"I can't just let anyone have it! Prove to me that you have the kingdom's best interests at heart first and then we'll talk."<<set $enemiesKilled to 0>><<set $enemiesNeeded to 5>><<set $currentObjective to "Defeat enemies of the kingdom<br>$enemiesKilled / $enemiesNeeded">><<replace "#objectives">><<print $currentObjective>><</replace>><<set $firstQuestState to "b">><</linkreplace>><<elseif $firstQuestState is "b">>"Have you taken care of the foul creatures yet?<br><<linkreplace "Of Course">><<if $enemiesKilled is $enemiesNeeded>><<set $playerGold to $playerGold + 100>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>>"Well done!" the monarch exclaims. "I have another task for you, come back later and I'll have everything ready for you."<<set $firstQuestState to "c">><<set $currentObjective to "Meet with the monarch later today">><<replace "#objectives">><<print $currentObjective>><</replace>><<else>>The monarch angrily exclaims, "You obviously haven't! Get back out there or you won't ever see that Runestone!"<</if>><</linkreplace>><</if>>
 
-    <!-- create link, set upjective, update objective -->
-    <<if $firstQuestState is "c">><<set $secondQuestState to "a">><br><</if>>
+        
+        <<if $firstQuestState is "c">>
+            <<linkreplace "Meet with the monarch">>
+                <<set $secondQuestState to "a">>
+                <<set $firstQuestState to "d">>
+                "I've recieved strange letters coming from a town to the south of here known as Vermeillon. These letters speak of vicious creatures that sprout up from thin air to ambush and drag off villagers one by one. My men refuse to be sent to their deaths and I don't personally blame them. If I am to part with my Runestone, I need you to assure me that Vermeillon is safe. Do this, and the Runestone is yours.
+                <<set $currentObjective to "Investigate Vermeillon">>
+                <<replace "#objectives">><<print $currentObjective>><</replace>>
+                <<set $secondQuestState to "b">>
+                <</linkreplace>>
+        <br><<elseif $secondQuestState is "d">>
+            "Have you brought word from Vermeillon?
+            <<if $path is "bad">>
+                <br><<linkreplace "I bring troubling news, those fiendish creatures detonated the town's mining charges and Vermeillon was decimated">>
+                    <<set $playerGold to $playerGold + 300>>
+                    <<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>>
+                    The Monarch looks stunned before finally decreeing, "That is grave news indeed, I'm sure you did all that you could. Please, retreieve your Runestone frommy vaults and leave me to mourn the loss of my people.
+                    <<set $secondQuestState to "e">>
+                    <<set $currentObjective to "Retreive the Runestone from the monarch's vault.">>
+                    <<replace "#objectives">><<print $currentObjective>><</replace>>
+                        <</linkreplace>>
+            <<else>>
+                <br><<linkreplace "Good news! The threat has been eliminated and we were able to safely evacuate the surviving townsfolk to Quasiton!">>
+                    <<set $playerGold to $playerGold + 300>>
+                    <<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>>
+                    The Monarch appears overjoyed, "This is wonderous news, truly you have earned the right to use my Runestone. Descend to my vaults and retreive it, and you can carry on with your quest!"
+                    <br>[[Descend into the castle vaults->CastleVaults]]
+                    <<set $secondQuestState to "e">>
+                    <<set $currentObjective to "Retreive the Runestone from the monarch's vault.">>
+                    <<replace "#objectives">><<print $currentObjective>><</replace>>
+                        <</linkreplace>>
+                <</if>>
+        <<elseif $secondQuestState is "f">>As the monarch notices you, he waves before returning to his kingly business.
+            <</if>>
 
-    <div id="bottomSection">[[Return to the castle gates->CastleGates]]</div><</nobr>>
+        <div id="bottomSection"><<if $secondQuestState is "e">>[[Descend into castle vaults->CastleVaults]]<br><</if>>[[Return to the castle gates->CastleGates]]</div>
+        <</nobr>>
 
 :: CastleVaults [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
-
-:: CastleBoss [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
-
-:: Runestone [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
+    <<nobr>>Vault description
+    <br>
+    <br>Runestone description
+    <br><<linkreplace "Take the runestone">>
+        I finally have it after all that work. Time to head back to the Old Man.
+        <<set $secondQuestState to "f">>
+        <<set $act1Complete to true>>
+        <<set $currentObjective to "Return to the Old Man in the Nexus">>
+        <<replace "#objectives">><<print $currentObjective>><</replace>>
+        <</linkreplace>>
+    <div id="bottomSection">[[Ascend to the Throne Room->ThroneRoom]]</div>
+        <<passiveHeal>><</nobr>>
 
 :: Path5A [ActOne]
-    <<nobr>><<passiveHeal>>
-
-    <div id="bottomSection">[[Return to the Castle Gates->CastleGates]]</div><</nobr>>
+    <<nobr>>Path away from castle
+    
+    <<if $vermeillonFinished is true>>A line of guards blovks the path to Vermeillon. "Sorry $class, the town is off limits to all except the monarch's guard after what happened there," the one at the front explains.<</if>>
+    <<passiveHeal>>
+    <div id="bottomSection"><<if $vermeillonFinished is not true>>[[Venture towards Vermeillon->Path5B]]<br><</if>>[[Return to the Castle Gates->CastleGates]]</div><</nobr>>
 
 :: Path5B [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
+    <<nobr>>Shifting environment description (Forest->Vermeillon)
+    
+    <<passiveHeal>>
+    <div id="bottomSection">[[Trudge forward->Path5C]]<br>[[Back the way you came->Path5A]]</div><</nobr>>
 
 :: Path5C [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
+    <<nobr>> Dank swamp description/ominous
+
+    <<passiveHeal>>
+    <div id="bottomSection"><<link "What was that sound?" "eMeenlock">><<set $introQuest2 to true>><</link>></div><</nobr>>
+
+:: VermeillonIntro [ActOne]
+    <<nobr>>Intro description
+    
+    <div id="bottomSection">[[What the hell is going on here?->Vermeillon]]</div><</nobr>>
 
 :: Vermeillon [ActOne]
-    <<nobr>><<passiveHeal>><</nobr>>
+    <<nobr>>Gentlemen, welcome to Dubai<<if $introQuest2 is true>><<set $respawnPoint to passage()>><<set $introQuest2 to false>><</if>>
+    <br>
+    <br>The town mine sits at the far end of the settlement. It is the source of the rumors the king mentioned.
+    <br>[[Enter the mine->VermeillonMine]]
+    <br>
+    <br>Nestled next to the inn is an alchemist brewing potions for the relief effort.<<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
+    <br>
+    <br>Poopy inn description
+    <br><<linkreplace "Rest at the makeshift inn">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a "refreshing" rest...</i><</linkreplace>>
+    <br>
+    <br><<if $path is "bad">>He dead
+        <<else>><br>A man clad in armor bearing the symbol of the monarch seems to be directing relief efforts here.
+            <br><<if $secondQuestState is "b">>
+                <<linkreplace "Speak with the guard in charge">>
+                    Good guy dialogue
+                    <br><i>(Warning, this choice will lock you out of the other choice in town)</i>
+                    <br><<linkreplace "Yes">>;
+                        "Wonderful!"
+                        <<set $path to "good">>
+                        <<set $secondQuestState to "c">>
+                        <<set $enemiesNeeded to 7>>
+                        <<set $enemiesKilled to 0>>
+                        <<set $currentObjective to "Thin the meenlock population<br>$enemiesKilled / $enemiesNeeded">>
+                        <<replace "#objectives">><<print $currentObjective>><</replace>>
+                        <</linkreplace>>&nbsp;&nbsp;&nbsp;<<linkreplace "No">><br>"That's a shame, come back if you change your mind..."<</linkreplace>><</linkreplace>>
+            <<elseif $secondQuestState is "c">>
+                "Have you killed enough meenlocks for us to set the charges?" inquires the guard.
+                <br><<linkreplace "Of course">>
+                    <<if $enemiesKilled is $enemiesNeeded>>
+                        "Good work, head towards the cave when you're ready to blow it to the heavens!" the guard cheers.
+                        <<set $secondQuestState to "c2">>
+                        <<set $currentObjective to "Blow up the cave!">>
+                        <<replace "#objectives">><<print $currentObjective>><</replace>>
+                    <<else>>
+                        "That's not enough, keep slaughtering them!" he cries.
+                        <</if>>
+                        <</linkreplace>>
+                    <</if>>
+            <</if>>
+            
+    <br>
+    <br><<if $path is "good">>He gone
+        <<else>>Nestled between two ruined houses is an ominous hooded figure who is discreetly beckoning you over.
+            <br><<if $secondQuestState is "b">>
+                <<linkreplace "Speak with the hooded figure">>
+                    Bad guy dialogue
+                    <br><i>(Warning, this choice will lock you out of the other choice in town)</i>
+                    <br><<linkreplace "Yes">>
+                        "Good" he coos.
+                        <<set $path to "bad">>
+                        <<set $secondQuestState to "c">>
+                        <<set $enemiesNeeded to 7>>
+                        <<set $enemiesKilled to 0>>
+                        <<set $currentObjective to "Charges set in the cave<br>$enemiesKilled / $enemiesNeeded">>
+                        <<replace "#objectives">><<print $currentObjective>><</replace>>
+                        <</linkreplace>>&nbsp;&nbsp;&nbsp;<<linkreplace "No">><br>"That's a shame, come back if you change your mind..."<</linkreplace>><</linkreplace>>
+            <<elseif $secondQuestState is "c">>
+                "Have you set all of the charges?" inquires the hooded figure.
+                <br><<linkreplace "Of course">>
+                        <<if $enemiesKilled is $enemiesNeeded>>
+                            "Good work, head towards the cave when you're ready to slip away" the figures slyly quips.
+                            <<set $secondQuestState to "c2">>
+                            <<set $currentObjective to "Blow up the town!">>
+                            <<replace "#objectives">><<print $currentObjective>><</replace>>
+                        <<else>>
+                            "That's not enough, you must set more" he cries.
+                            <</if>>
+                        <</linkreplace>>
+                <</if>>
+            <</if>>
+    <<passiveHeal>><</nobr>>
+
+:: VermeillonMine [ActOne]
+    <<nobr>><<passiveHeal>>The mine branches out across various tunnels into the darkness. The air here feels thick and causes the hairs on the back of your neck to stand erect.
+
+    <div id="bottomSection"><<link "Explore the Mine" "eMeenlock">><<set $savedPassage to passage()>><</link>>
+    <br><<if $secondQuestState is "c2" and $path is "good">>[[Meet with the guard to detonate the charges->VermeillonGoodEnd]]<<elseif $secondQuestState is "c2" and $path is "bad">>[[Meet with the hooded figure to detonate the charges->VermeillonBadEnd]]<</if>>
+    <br>[[Return to Vermeillon->Vermeillon]]</div><</nobr>>
+
+:: VermeillonGoodEnd [ActOne]
+    <<nobr>><<set $respawnPoint to "CastleGates">><<set $vermeillonFinished to true>><<set $secondQuestState to "d">><<set $end to "good">><<set $currentObjective to "Report back to the monarch">><<replace "#objectives">><<print $currentObjective>><</replace>>
+    Cave Destruction description
+    <br>
+    <br>Go home man
+    <br>
+    <div id="bottomSection">[[Return to the Castle->CastleGates]]</div>
+    <</nobr>>
+
+
+:: VermeillonBadEnd [ActOne]
+    <<nobr>><<set $respawnPoint to "CastleGates">><<set $vermeillonFinished to true>><<set $secondQuestState to "d">><<set $end to "bad">><<set $currentObjective to "Report back to the monarch">><<replace "#objectives">><<print $currentObjective>><</replace>>
+    Town Destruction description
+    <br>
+    <br>Go home man
+    <br>
+    <div id="bottomSection">[[Return to the Castle->CastleGates]]</div>
+    <</nobr>>
