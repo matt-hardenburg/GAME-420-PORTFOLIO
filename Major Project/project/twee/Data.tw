@@ -7,16 +7,11 @@
 
 :: StoryInit [data] {"position":"150,150"}
     <<script>>Config.history.maxStates = 1;<</script>>
-    <!-- Story Variables -->
     <<set $currentObjective to "???">>
     <<set $firstQuestState to "a">>
     <<set $inCombat to false>>
     <<set $IntroAct1 to false>>
     <<set $act1complete to false>>
-    <!-- LevelUp Variables -->
-    <<set $levelUpReady to false>>
-    <<set $levelThresholds to [0, 500, 750, 1000]>>
-    <<set $skillPointsGain to 10>>
     <<set $attributePoints to 10>>
     <<set $skillPoints to 15>>
     <<set $attributeCap to 10>>
@@ -36,7 +31,6 @@
     <<set $playerLck to 5>>
     <<set $playerBarter to 5>> 
     <<set $playerMedicine to 5>> 
-    <<set $playerSpeech to 5>>
     <<set $playerSurvival to 5>>
     <<set $playerLooting to 5>> 
     <<set $playerHP to 0>>
@@ -48,7 +42,7 @@
     <<consumable "Health Potion">>
         <<set $playerHP to Math.clamp($playerHP + (10 + random(1, 3) * Math.round($playerMedicine/2)), 0, $playerMHP)>>
         <<description>>\
-            <<include "A somewhat diluted health potion. (Heals for 15HP)">>\
+            <<include "A somewhat diluted health potion.">>\
     <</consumable>>
     <!-- Inventories -->
     <<set $playerInv to Inventory.create()>>
@@ -57,7 +51,7 @@
     <<run $shopInv.pickup("Health Potion", 10)>>
 
 :: StorySubtitle [data] {"position":"150,150"}
-    v0.0.1
+    v0.0.2
 
 :: StoryTitle [data] {"position":"150,150"}
     Major Project
@@ -71,8 +65,8 @@
     <div id="objectives"><<print $currentObjective>></div>
 
 :: StoryMenu [data] {"position":"150,150"}
-    <<link "Stats" "PlayerStats">><<set $preMenu1 to passage()>><</link>>
-    <<link "Inventory" "PlayerInventory">><<set $preMenu2 to passage()>><</link>>
+    <<link "Stats" "PlayerStats">><<if passage() is not "PlayerStats">><<set $preMenu1 to passage()>><</if>><</link>>
+    <<link "Inventory" "PlayerInventory">><<if passage() is not "PlayerInventory">><<set $preMenu2 to passage()>><</if>><</link>>
 :: PlayerStats [data]
     <center>
     <div id="stats">
@@ -106,5 +100,13 @@
     <<widget "passiveHeal">>
         <<if $inCombat is false>>
             <<set $playerHP to Math.clamp($playerHP + Math.round($playerSurvival/2), 0, $playerMHP)>>            
+        <</if>>
+    <</widget>>
+
+    <<widget "pathAmbush">>
+        <<set $ambushRoll to random(1,6)>>
+        <<if $ambushRoll gte 5>>
+            <<set $ambushFlag to true>>
+        <<else>><<set $ambushFlag to false>>
         <</if>>
     <</widget>>

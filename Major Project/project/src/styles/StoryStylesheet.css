@@ -1,5 +1,6 @@
 body
 {
+    text-align: center;
     background-color: rgba(22, 22, 21, 0.877);
     font-size: 150%;
     font-family: Arial, Helvetica, sans-serif;
@@ -10,13 +11,35 @@ body
     font-size: medium;
 }
 
+#imageAndText {
+    text-align: center;
+    width: 50%;
+    display: block;
+    right: auto;
+    margin: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#combatImg {
+    display: block;
+    position: fixed;
+    left: 23%;
+    margin-right: 2%;
+    margin-left: 50%;
+    float: right;
+    width: 50%;
+}
+
 #passage {
     top: 0;
-    left: calc(100%-280px);
+    left: auto;
     position: absolute;
-    margin: 2%;
     width: auto;
-    margin: 5%;
+    margin: auto;
+    
 }
 
 #passage-combat {

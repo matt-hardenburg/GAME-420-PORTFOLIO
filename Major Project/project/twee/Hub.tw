@@ -1,20 +1,45 @@
 :: MidNexus [hub] {"position":"300,550"}
-    <<nobr>>Ipsum
-    <<passiveHeal>>
-    <<set $respawnPoint to passage()>>
-    <div id="bottomSection">[[Go towards the Gateways->Gateways]]
-    <br><<linkreplace "Investigate the sealed doors at the base of the pillar">>
-        <<if $act1Complete is not true>>
-            The heavy stone doors are sealed shut with no way to open them.
-        <<else>>Ipsum<br><br>[[Head downstairs->LowerNexus]]
-        <</if>>
-        <</linkreplace>></div><</nobr>>
+    <<nobr>>
+        Nexus Description
+        <br>
+        <br>What better place to rest than your new home?
+        <br><<linkreplace "Take a break">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>There's no place like home...</i><</linkreplace>>
+        <br>
+        <br><<if $act1Complete is false>>
+            The Old Man who greeted you here upon your arrival is nowhere to be seen
+            <<else>>
+            The Old Man is milling about at the base of the pillar, deep in thought.
+            <br><br><i>(Warning) It is recommended to create a save and stock up before proceeding as you will be unable to turn back)</i>
+            <br><<linkreplace "I've acquired the Monarch's Runestone">>
+                "Excellent work!" he claims. "Come with me, the apex of your efforts is nigh $class."
+                <<set $currentObjective to "Follow the Old Man">>
+                <<replace #objectives>><<print $currentObjective>><</replace>>
+                <<set $respawnPoint to passage()>>
+                <<link "Follow the Old Man" "LowerNexus">><</link>>
+                    <</linkreplace>>
+                <</if>>
+        <<passiveHeal>><<set $respawnPoint to passage()>>
+        <div id="bottomSection">[[Go towards the Gateways->Gateways]]
+        <br><<linkreplace "Investigate the sealed doors at the base of the pillar">>The heavy stone doors are sealed shut with no way to open them.<</linkreplace>></div>
+        <</nobr>>
 
 :: LowerNexus [hub] {"position":"300,700"}
-    <<nobr>><<passiveHeal>><div id="bottomSection">[[Return upstairs->MidNexus]]</div><</nobr>>
+    <<nobr>>
+        The Old Man slots the monarch's Runestone into the depression at the center of the doors, causing them to slowly slide open with a deafening thunder. The Old Man dons his hood as he descends the newly revealed steps.
+        <br>
+        <br>By time you catch up, you notice the old man lighting candles around the room with just a touch of his fingertips.
+        <br>
+        <br>As you fully enter the room, you become aware of the fact that your body is frozen in place! Glancing down you notice that you have waltzed directly across some form of eldritch scrawl across the floor. Your veins feel as if they are alight with flame while your muscles feel icy cold.
+        <br>
+        <br>As the Old Man finishes lighting the candles, the room slowly begins to fill with a pitch black fog, snaking its way towards him.
+        <br>"I never intended to decieve you my friend, but you must realize the unique situation you alone are in. A soul with no place to truly call home, and a body that refuses to die. Your will be the perfect vessel for my rebirth." 
+        <br>
+        <br>Observing your valiant struggle against your eldritch bonds, he continues, "This body is tethered here to the Nexus, but in your body I will rebuild the Gateways and rule over them with an undying fist!"
+        <div id="bottomSection">[[The fog engulfs the room->eFinal]]</div>
+        <</nobr>>
 
 :: Gateways [hub] {"position":"750,550"}
-    <<nobr>><center>In this chamber stands many Gateways. However, all but one are shattered.</center>
+    <<nobr>>In this chamber stands many Gateways. However, all but one are shattered.
     <br>
     <div id="bottomSection"><<if $IntroAct1 is false>>
     <<linkreplace "Investigate the only lit portal">>
@@ -27,3 +52,6 @@
     <</if>>
     <br>
     <br>[[Return to the center of the Nexus->MidNexus]]</div><</nobr>>
+
+:: EndCard [hub]
+    The End

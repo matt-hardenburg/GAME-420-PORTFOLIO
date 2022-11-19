@@ -27,13 +27,13 @@
         <<elseif $log is "eCrit">>
             Critical Hit! The $eName uses it's $eAtk on you, dealing $eAtkDmg damage.
         <<elseif $log is "eMiss">>
-            "The $eName missed!"
+            The $eName missed!
         <<else>><</if>>
     </div>
 
 :: Combat
     <<include "CurrentEnemy">>
-    <<include "Log">>
+    <<include "Log">><div id="combatImg"><<if $eName is "Kobold">><img src="assets/enemies/kobold1.png"><<elseif $eName is "Orc">><img src="assets/enemies/orc1.png"><<elseif $eName is "Meenlock">><img src="assets/enemies/meenlock.png"><<else>><img src="assets/enemies/final.png"><</if>></div>
     <<include "Player">>
 
 :: Player
@@ -44,21 +44,21 @@
         <<nobr>>
             <<button "Attack!">>
                 <<set $pAtk to "trusty sword">>
-                    <<set _toHit to random(1,20) + Math.round($playerLck/2) >>
+                    <<set $toHit to random(1,20) + Math.round($playerLck/2) >>
                     <!-- Crit -->
-                    <<if _toHit is 20>>
+                    <<if $toHit is 20>>
                         <<set $pAtkDmg to 2 * random(1,8) + Math.round($playerStr/2)>>
                         <<set $eHP to $eHP - $pAtkDmg>>
-                        <<if _edot is true>><<set $pDot to Math.round($pAtkDmg/2)>><<set $eHP to $eHP - $pAtkDmg>><<set _edot to false>><</if>>
+                        <<if _edot is true>><<set $pDot to Math.round($pAtkDmg/2)>><<set $eHP to Math.clamp($eHP - $pAtkDmg, 0, $eMHP)>><<set _edot to false>><</if>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youCrit">>
                         <<set $turn to "enemy">>
                         <<if (($class is "Justicar" or $class is "Spellblade") and $cooldown % 3 is not 0) or (($class is "Cultist" and $cooldown % 5 is not 0))>><<set $cooldown to $cooldown + 1>><</if>>
                     <!-- Hit -->
-                    <<elseif _toHit gte $eAC>>
+                    <<elseif $toHit gte $eAC>>
                         <<set $pAtkDmg to random(1,8) + Math.round($playerStr/2)>>
                         <<set $eHP to $eHP - $pAtkDmg>>
-                        <<if _edot is true>><<set $pDot to Math.round($pAtkDmg/2)>><<set $eHP to $eHP - $pAtkDmg>><<set _edot to false>><</if>>
+                        <<if _edot is true>><<set $pDot to Math.round($pAtkDmg/2)>><<set $eHP to Math.clamp($eHP - $pAtkDmg, 0, $eMHP)>><<set _edot to false>><</if>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youHit">>
                         <<set $turn to "enemy">>
@@ -73,24 +73,24 @@
             <<if $class is "Justicar" and $cooldown % 3 is 0>>
                 <<button "Divine Siphon">>
                     <<set $pAtk to "Divine Siphon">>
-                    <<set _toHit to random(1,20) + Math.round($playerLck/2)>>
+                    <<set $toHit to random(1,20) + Math.round($playerLck/2)>>
                     <!-- Crit -->
-                    <<if _toHit is 20>>
+                    <<if $toHit is 20>>
                         <<set $pAtkDmg to 2 * random(1,8) + Math.round($playerInt/2)>>
                         <<set $pHeal to Math.round($pAtkDmg/2)>>
                         <<set $playerHP to Math.clamp($playerHP + $pHeal, 0, $playerMHP)>>
-                        <<set $eHP to $eHP - $pAtkDmg>>
+                        <<set $eHP to Math.clamp($eHP - $pAtkDmg,  0, $eMHP)>>
                         <<updatemeter 'pHP' '$pHP / $pMHP'>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youJusticarCrit">>
                         <<set $turn to "enemy">>
                         <<set $cooldown to $cooldown + 1>>
                     <!-- Hit -->
-                    <<elseif _toHit gte $eAC>>
+                    <<elseif $toHit gte $eAC>>
                         <<set $pAtkDmg to random(1,8) + Math.round($playerInt/2)>>
                         <<set $pHeal to Math.round($pAtkDmg/2)>>
                         <<set $playerHP to Math.clamp($playerHP + $pHeal, 0, $playerMHP)>>
-                        <<set $eHP to $eHP - $pAtkDmg>>
+                        <<set $eHP to Math.clamp($eHP - $pAtkDmg, 0, $eMHP)>>
                         <<updatemeter 'pHP' '$pHP / $pMHP'>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youJusticarHit">>
@@ -107,22 +107,22 @@
             <<if $class is "Spellblade" and $cooldown % 3 is 0>>
                 <<button "Fireball">>
                     <<set $pAtk to "Fireball">>
-                    <<set _toHit to random(1,20) + Math.round($playerLck/2)>>
+                    <<set $toHit to random(1,20) + Math.round($playerLck/2)>>
                     <!-- Crit -->
-                    <<if _toHit is 20>>
+                    <<if $toHit is 20>>
                         <<set $pAtkDmg to 2 * random(1,8) + Math.round($playerInt/2)>>
                         <<set $pDot to Math.round($pAtkDmg/2)>>
-                        <<set $eHP to $eHP - $pAtkDmg - $pDot>>
+                        <<set $eHP to Math.clamp($eHP - $pAtkDmg - $pDot, 0, $eMHP)>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youSpellbladeCrit">>
                         <<set $turn to "enemy">>
                         <<set $cooldown to $cooldown + 1>>
                         <<set _eDot to true>>
                     <!-- Hit -->
-                    <<elseif _toHit gte $eAC>>
+                    <<elseif $toHit gte $eAC>>
                         <<set $pAtkDmg to random(1,8) + Math.round($playerInt/2)>>
                         <<set $pDot to Math.round($pAtkDmg/2)>>
-                        <<set $eHP to $eHP - $pAtkDmg - $pDot>>
+                        <<set $eHP to Math.clamp($eHP - $pAtkDmg - $pDot, 0, $eMHP)>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youSpellbladeHit">>
                         <<set $turn to "enemy">>
@@ -139,19 +139,19 @@
             <<if $class is "Cultist" and $cooldown % 5 is 0>>
                 <<button "Touch of the Heretic">>
                     <<set $pAtk to "Touch of the Heretic">>
-                    <<set _toHit to random(1,20) + Math.round($playerLck/2)>>
+                    <<set $toHit to random(1,20) + Math.round($playerLck/2)>>
                     <!-- Crit -->
-                    <<if _toHit is 20 or _toHit is 19>>
-                        <<set $eHP to 0>>
-                        <<set $instaKill to true>>
+                    <<if $toHit is 20 or $toHit is 19>>
+                        <<if $eName is "Shadow">><<set $pAtkDmg to random(1,10) + random(1,10) + random(1,10) + Math.round($playerInt/2)>><<set $eHP to Math.clamp($eHP - (2*$pAtkDmg), 0, $eMHP)>>
+                        <<else>><<set $eHP to 0>><<set $instaKill to true>><</if>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youCultistCrit">>
                         <<set $turn to "enemy">>
                         <<set $cooldown to $cooldown + 1>>
                     <!-- Hit -->
-                    <<elseif _toHit gte $eAC>>
+                    <<elseif $toHit gte $eAC>>
                         <<set $pAtkDmg to random(1,10) + random(1,10) + random(1,10) + Math.round($playerInt/2)>>
-                        <<set $eHP to $eHP - $pAtkDmg>>
+                        <<set $eHP to Math.clamp($eHP - $pAtkDmg, 0, $eMHP)>>
                         <<updatemeter 'eHP' '$eHP / $eMHP'>>
                         <<set $log to "youCultistHit">>
                         <<set $turn to "enemy">>
@@ -167,30 +167,35 @@
                     <</button>><</if>>
             &nbsp;&nbsp;&nbsp; 
             <<if $playerInv.has("Health Potion")>><<button "Drink a Health Potion">><<run $playerInv.use("Health Potion")>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><</button>> &nbsp;(<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span>&nbsp;remaining)<</if>>
-            <</nobr>>
+        <</nobr>>
         </div>
         <!-- Enemy Turn -->
     <<elseif $turn is "enemy">>
         <div id="bottomSection">
+        <<set $eToHit to random(1,20)>>
         <<button "Continue">>
-                <<set _toHit to random(1,20)>>
-                <!-- Crit -->
-                <<if _toHit is 20>>
-                    <<set $playerHP to $playerHP - 2 * $eAtkDmg>>
-                    <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
-                    <<set $log to "eCrit">>
-                    <<set $turn to "player">>
-                <!-- Hit -->
-                <<elseif _toHit gte $pAC>>
-                    <<set $playerHP to $playerHP - $eAtkDmg>>
-                    <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
-                    <<set $log to "eHit">>
-                    <<set $turn to "player">>
-                <!-- Miss -->
-                <<else>>
-                    <<set $log to "eMiss">>
-                    <<set $turn to "player">>
-                <</if>> 
+            <<if $eName is "Kobold">><<set $eAtkDmg to random(1,8)>>
+            <<elseif $eName is "Orc">><<set $eAtkDmg to random(1,9)>>
+            <<elseif $eName is "Meenlock">><<set $eAtkDmg to (random(1, 4) + random(1, 4) + random(1, 4))>>
+            <<else>><<set $eAtkDmg to random(4,12)>>
+            <</if>>
+            <!-- Crit -->
+            <<if $eToHit is 20>>
+                <<set $playerHP to Math.clamp($playerHP - 2 * $eAtkDmg, 0, $playerMHP)>>
+                <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+                <<set $log to "eCrit">>
+                <<set $turn to "player">>
+            <!-- Hit -->
+            <<elseif $eToHit gte $playerAC>>
+                <<set $playerHP to Math.clamp($playerHP - $eAtkDmg, 0, $playerMHP)>>
+                <<updatemeter 'pHP' '$playerHP / $playerMHP'>>
+                <<set $log to "eHit">>
+                <<set $turn to "player">>
+            <!-- Miss -->
+            <<else>>
+                <<set $log to "eMiss">>
+                <<set $turn to "player">>
+            <</if>> 
             <<goto "Combat">>
         <</button>>
         </div>
@@ -208,22 +213,24 @@
     <br>
 
 :: Win
+    <<if $eName is "Shadow">><<goto "EndCard">><</if>>
     <<if $instaKill is true>>You claimed their soul for the Forbidden One!<br><<set $instaKill to false>><</if>><<set $foundGold to random(5, 20) + 2 * $playerLooting>>
     After defeating the <<print $eName>>, you found <<print $foundGold>> gold!
     <<set _potionReward to random(1,20)>>
     <<if _potionReward gte 12>> You also found a health potion! <<run $playerInv.pickup("Health Potion", 1)>>
-    <<else>><</if>><<set $enemiesKilled to Math.clamp($enemiesKilled + 1, 0, $enemiesNeeded)>><<replace "#objectives">><<print $currentObjective>><</replace>>
+    <<else>><</if>><<set $badLuckProtection to true>><<set $enemiesKilled to Math.clamp($enemiesKilled + 1, 0, $enemiesNeeded)>><<replace "#objectives">><<print $currentObjective>><</replace>>
 
-    <div id="bottomSection"><<link "Carry on" $savedPassage>>
-        <<set $playerGold to $playerGold + $foundGold>>
-    <</link>></div>
+    <div id="bottomSection"><<if $introQuest2 is true>><<link "Carry on" "VermeillonIntro">><<set $playerGold to $playerGold + $foundGold>><</link>><<else>><<link "Carry on" $savedPassage>><<set $playerGold to $playerGold + $foundGold>><</link>><</if>></div>
 
 :: Lose
     You Lose!
     <div id="bottomSection"><<link "That's rough" $respawnPoint>><<set $playerHP to $playerMHP>><</link>></div>
 
 :: eKobold
-    Suddenly a kobold jumps out in front of you brandishing a blade!
+    <div id="imageAndText">Suddenly a kobold jumps out in front of you brandishing a blade!
+
+    <img src="assets/enemies/kobold1.png"></div>
+    <<nobr>>
     <<set $eName to "Kobold">>
     <<set $eMHP to 50>>
     <<set $eHP to $eMHP>>
@@ -231,15 +238,18 @@
     <<set $eAtkDmg to random(1,8)>>
     <<set $eAC to 10>>
     <<set $cooldown to 0>>
-    <<set _coinFLip to either(1,2)>>
+    <<set _coinFlip to either(1,2)>>
     <<if _coinFlip is 1>> <<set $turn to "player">> <<set $log to "you">>
     <<else>> <<set $turn to "enemy">><<set $log to "enemy">>
-    <</if>>
+    <</if>><</nobr>>
 
     <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
 
 :: eOrc
-    Suddenly an orc jumps out in front of you brandishing a blade!
+    <div id="imageAndText">Suddenly an orc jumps out in front of you brandishing a blade!
+    
+    <img src="assets/enemies/orc1.png"></div>
+    <<nobr>>
     <<set $eName to "Orc">>
     <<set $eMHP to 60>>
     <<set $eHP to $eMHP>>
@@ -247,9 +257,47 @@
     <<set $eAtkDmg to random(1,9)>>
     <<set $eAC to 11>>
     <<set $cooldown to 0>>
-    <<set _coinFLip to either(1,2)>>
+    <<set _coinFlip to either(1,2)>>
     <<if _coinFlip is 1>> <<set $turn to "player">> <<set $log to "you">>
     <<else>> <<set $turn to "enemy">><<set $log to "enemy">>
-    <</if>>
+    <</if>><</nobr>>
 
     <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
+
+:: eMeenlock
+    <div id="imageAndText">Suddenly a meenlock materializes in front of you!
+
+    <img src="assets/enemies/meenlock.png"></div>
+    <<nobr>>
+    <<set $eName to "Meenlock">>
+    <<set $eMHP to 45>>
+    <<set $eHP to $eMHP>>
+    <<set $eAtk to "toxic claws">>
+    <<set $eAtkDmg to (random(1, 4) + random(1, 4) + random(1, 4))>>
+    <<set $eAC to 11>>
+    <<set $cooldown to 0>>
+    <<set _coinFlip to either(1,2)>>
+    <<if _coinFlip is 1>> <<set $turn to "player">> <<set $log to "you">>
+    <<else>> <<set $turn to "enemy">><<set $log to "enemy">>
+    <</if>><</nobr>>
+
+    <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
+
+:: eFinal
+    <div id="imageAndText">As quickly as you were engulfed, the fog disperses and coalesces into the shape of a man, albeit featureless; the Old Man is now a being of pure shadow.<br><br>However, as he was transforming his concentartion wavered, allowing you to break free from your bonds. You think to yourself, "If he intends to steal my body, he won't do so without a fight!"
+    
+    <img src="assets/enemies/final.png"></div>
+    <<nobr>>
+    <<set $eName to "Shadow">>
+    <<set $eMHP to 120>>
+    <<set $eHP to $eMHP>>
+    <<set $eAtk to "weapon">>
+    <<set $eAtkDmg to random(4,12)>>
+    <<set $eAC to 13>>
+    <<set $cooldown to 0>>
+    <<set _coinFlip to either(1,2)>>
+    <<if _coinFlip is 1>> <<set $turn to "player">> <<set $log to "you">>
+    <<else>> <<set $turn to "enemy">><<set $log to "enemy">>
+    <</if>><</nobr>>
+
+    <div id="bottomSection">[[Kick his ass!->Combat]]</div>
