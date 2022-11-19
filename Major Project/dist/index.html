@@ -317,12 +317,11 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;div id=&quot;bottomSection&quot;&gt;[[Venture Forth-&gt;QuasitonCenter]]
     &lt;br&gt;[[Back Home-&gt;Gateways]]&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="QuasitonCenter" tags="ActOne" position="225,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div id=&quot;quasiton&quot;&gt;
     Following the path from the portal, leads to the humble town Quasiton.
-    &lt;br&gt;&lt;br&gt;The townis abuzz with daily activity despite the fact that a meteor recently crashed into the town&#39;s sole shop. Where should I go?
-    &lt;&lt;passiveHeal&gt;&gt;&lt;&lt;set $badLuckProtection to false&gt;&gt;
-    [[Head back towards the Gateway-&gt;PathToQuasiton]]
+    &lt;br&gt;&lt;br&gt;The town is abuzz with daily activity despite the fact that a meteor recently crashed into the town&#39;s sole shop. Where should I go?
     &lt;br&gt;
+    &lt;br&gt;[[Head back towards the Gateway-&gt;Act1Start]]
     &lt;br&gt;
-    Near the crater where the shop used to be is a small stand selling potions. &lt;&lt;set _potionCost to 30 - Math.round($playerBarter/2)&gt;&gt;
+    &lt;br&gt;Near the crater where the shop used to be is a small stand selling potions. &lt;&lt;set _potionCost to 30 - Math.round($playerBarter/2)&gt;&gt;
     &lt;br&gt;&lt;&lt;link &quot;Purchase one for _potionCost gold&quot;&gt;&gt;&lt;&lt;if $playerGold gte _potionCost&gt;&gt;&lt;&lt;set $playerGold to $playerGold - _potionCost&gt;&gt;&lt;&lt;replace &quot;#goldOwned&quot;&gt;&gt;Gold: &lt;&lt;print $playerGold&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;run $playerInv.pickup(&quot;Health Potion&quot;, 1)&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt;
     &lt;br&gt;
     &lt;br&gt;
@@ -339,7 +338,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;br&gt;
     &lt;br&gt;
     There is also a wide, well-trodden path leading out of Quasiton into the forest. A sign stands near the exit gate reading &quot;To the Castle&quot;.
-    &lt;br&gt;[[Venture towards the Castle-&gt;Path1]]&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="GrindForest" tags="ActOne" position="350,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;passiveHeal&gt;&gt;The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.
+    &lt;br&gt;[[Venture towards the Castle-&gt;Path1]]&lt;/div&gt;&lt;&lt;passiveHeal&gt;&gt;&lt;&lt;set $badLuckProtection to false&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="GrindForest" tags="ActOne" position="350,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;passiveHeal&gt;&gt;The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.
     
     &lt;div id=&quot;bottomSection&quot;&gt;&lt;&lt;set _randomEnemy to random(1, 2)&gt;&gt;&lt;&lt;if _randomEnemy is 1&gt;&gt;&lt;&lt;link &quot;Explore the Forest&quot; &quot;eKobold&quot;&gt;&gt;&lt;&lt;set $savedPassage to passage()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;link &quot;Explore the Forest&quot; &quot;eOrc&quot;&gt;&gt;&lt;&lt;set $savedPassage to passage()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
     &lt;br&gt;[[Return to Quasiton&#39;s Center-&gt;QuasitonCenter]]&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Path1" tags="ActOne" position="475,100" size="100,100">&lt;&lt;nobr&gt;&gt;Ipsum 1
@@ -412,7 +411,8 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
                 &lt;br&gt;&lt;&lt;linkreplace &quot;I bring troubling news, those fiendish creatures detonated the town&#39;s mining charges and Vermeillon was decimated&quot;&gt;&gt;
                     &lt;&lt;set $playerGold to $playerGold + 300&gt;&gt;
                     &lt;&lt;replace &quot;#goldOwned&quot;&gt;&gt;Gold: &lt;&lt;print $playerGold&gt;&gt;&lt;&lt;/replace&gt;&gt;
-                    The Monarch looks stunned before finally decreeing, &quot;That is grave news indeed, I&#39;m sure you did all that you could. Please, retreieve your Runestone frommy vaults and leave me to mourn the loss of my people.
+                    The Monarch looks stunned before finally decreeing, &quot;That is grave news indeed, I&#39;m sure you did all that you could. Please, retreieve your Runestone from my vaults and leave me to mourn the loss of my people.
+                    &lt;br&gt;[[Descend into the castle vaults-&gt;CastleVaults]]
                     &lt;&lt;set $secondQuestState to &quot;e&quot;&gt;&gt;
                     &lt;&lt;set $currentObjective to &quot;Retreive the Runestone from the monarch&#39;s vault.&quot;&gt;&gt;
                     &lt;&lt;replace &quot;#objectives&quot;&gt;&gt;&lt;&lt;print $currentObjective&gt;&gt;&lt;&lt;/replace&gt;&gt;
@@ -747,7 +747,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="CurrentEnemy" tags="" position="1100,350" size="100,100">&lt;div id=&quot;enemy&quot;&gt;&lt;&lt;showmeter &#39;eHP&#39; $eHP / $eMHP&gt;&gt;&lt;/div&gt;
     &lt;br&gt;</tw-passagedata><tw-passagedata pid="30" name="Win" tags="" position="1225,350" size="100,100">&lt;&lt;if $eName is &quot;Shadow&quot;&gt;&gt;&lt;&lt;goto &quot;EndCard&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
     &lt;&lt;if $instaKill is true&gt;&gt;You claimed their soul for the Forbidden One!&lt;br&gt;&lt;&lt;set $instaKill to false&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $foundGold to random(5, 20) + 2 * $playerLooting&gt;&gt;
-    After defeating the &lt;&lt;print $eName&gt;&gt;, you found &lt;&lt;print $foundGold&gt;&gt; gold!
+    After defeating the &lt;&lt;print $eName&gt;&gt;, you found &lt;&lt;print $foundGold&gt;&gt; gold!&lt;&lt;if $path is &quot;bad&quot;&gt;&gt;&lt;br&gt;You place a dynamite charge near where the $eName fell.&lt;&lt;/if&gt;&gt;
     &lt;&lt;set _potionReward to random(1,20)&gt;&gt;
     &lt;&lt;if _potionReward gte 12&gt;&gt; You also found a health potion! &lt;&lt;run $playerInv.pickup(&quot;Health Potion&quot;, 1)&gt;&gt;
     &lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $badLuckProtection to true&gt;&gt;&lt;&lt;set $enemiesKilled to Math.clamp($enemiesKilled + 1, 0, $enemiesNeeded)&gt;&gt;&lt;&lt;replace &quot;#objectives&quot;&gt;&gt;&lt;&lt;print $currentObjective&gt;&gt;&lt;&lt;/replace&gt;&gt;

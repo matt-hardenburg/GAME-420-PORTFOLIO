@@ -9,12 +9,11 @@
 :: QuasitonCenter [ActOne]
     <<nobr>><div id="quasiton">
     Following the path from the portal, leads to the humble town Quasiton.
-    <br><br>The townis abuzz with daily activity despite the fact that a meteor recently crashed into the town's sole shop. Where should I go?
-    <<passiveHeal>><<set $badLuckProtection to false>>
-    [[Head back towards the Gateway->PathToQuasiton]]
+    <br><br>The town is abuzz with daily activity despite the fact that a meteor recently crashed into the town's sole shop. Where should I go?
     <br>
+    <br>[[Head back towards the Gateway->Act1Start]]
     <br>
-    Near the crater where the shop used to be is a small stand selling potions. <<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br>Near the crater where the shop used to be is a small stand selling potions. <<set _potionCost to 30 - Math.round($playerBarter/2)>>
     <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
     <br>
     <br>
@@ -31,7 +30,7 @@
     <br>
     <br>
     There is also a wide, well-trodden path leading out of Quasiton into the forest. A sign stands near the exit gate reading "To the Castle".
-    <br>[[Venture towards the Castle->Path1]]</div><</nobr>>
+    <br>[[Venture towards the Castle->Path1]]</div><<passiveHeal>><<set $badLuckProtection to false>><</nobr>>
 
 :: GrindForest [ActOne]
     <<nobr>><<passiveHeal>>The forest sprawls outward from the town and seems to stretch on forever. A thin fog obscures your vision further than 20 yards however.
@@ -134,7 +133,8 @@
                 <br><<linkreplace "I bring troubling news, those fiendish creatures detonated the town's mining charges and Vermeillon was decimated">>
                     <<set $playerGold to $playerGold + 300>>
                     <<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>>
-                    The Monarch looks stunned before finally decreeing, "That is grave news indeed, I'm sure you did all that you could. Please, retreieve your Runestone frommy vaults and leave me to mourn the loss of my people.
+                    The Monarch looks stunned before finally decreeing, "That is grave news indeed, I'm sure you did all that you could. Please, retreieve your Runestone from my vaults and leave me to mourn the loss of my people.
+                    <br>[[Descend into the castle vaults->CastleVaults]]
                     <<set $secondQuestState to "e">>
                     <<set $currentObjective to "Retreive the Runestone from the monarch's vault.">>
                     <<replace "#objectives">><<print $currentObjective>><</replace>>
