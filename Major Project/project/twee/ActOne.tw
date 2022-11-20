@@ -125,7 +125,7 @@
 
     <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Head towards the castle gates->CastleGates]]
-    <<if $foundShrine is true>><br>[[Venture towards to the shrine->Path3C]]<</if>>
+    <<if $foundShrine is true>><br>[[Venture towards the shrine->Path3C]]<</if>>
     <br>[[Venture into the woods leading towards Quasiton->Path3B]]</div>
         <</nobr>>
 
@@ -266,7 +266,7 @@
     <br>
     <br>Outside of the town, the token guard force notices the commotion barreling towards them, and quickly raises the alarm. After a short delay a small group of around 15 villagers emerge bearing torches at the entrance.
     <br>
-    <br>The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the "guard" who saw your approach quips, "Hell of a time to come visitng Vermeillon, now you're trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day." As he returns to his post, he informs you, "Go have a rest at the inn and find the Captain in the morning if you want to help." 
+    <br>The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the "guard" who saw your approach quips, "Hell of a time to come visiting Vermeillon, now you're trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day." As he returns to his post, he informs you, "Go have a rest at the inn and find the Captain in the morning if you want to help." 
     <div id="bottomSection">[[What the hell is going on here?->Vermeillon]]</div><</nobr>>
 
 :: Vermeillon [ActOne]
