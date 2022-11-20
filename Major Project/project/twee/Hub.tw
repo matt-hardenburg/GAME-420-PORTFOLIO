@@ -1,6 +1,6 @@
 :: MidNexus [hub] {"position":"300,550"}
     <<nobr>>
-        Nexus Description
+        The Nexus, a large circular stone chamber surrounding a massive stone pillar emblazoned with various gemstones. Torches line the walls painting the room with a warm glow. There appear to be a set of doors carved into the pillar.
         <br>
         <br>What better place to rest than your new home?
         <br><<linkreplace "Take a break">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>There's no place like home...</i><</linkreplace>>
@@ -9,7 +9,7 @@
             The Old Man who greeted you here upon your arrival is nowhere to be seen
             <<else>>
             The Old Man is milling about at the base of the pillar, deep in thought.
-            <br><br><i>(Warning) It is recommended to create a save and stock up before proceeding as you will be unable to turn back)</i>
+            <br><br><i>(<b>Warning:</b> It is recommended to create a save and stock up before proceeding as you will be unable to turn back)</i>
             <br><<linkreplace "I've acquired the Monarch's Runestone">>
                 "Excellent work!" he claims. "Come with me, the apex of your efforts is nigh $class."
                 <<set $currentObjective to "Follow the Old Man">>
@@ -34,13 +34,16 @@
         <br>As the Old Man finishes lighting the candles, the room slowly begins to fill with a pitch black fog, snaking its way towards him.
         <br>"I never intended to decieve you my friend, but you must realize the unique situation you alone are in. A soul with no place to truly call home, and a body that refuses to die. Your will be the perfect vessel for my rebirth." 
         <br>
-        <br>Observing your valiant struggle against your eldritch bonds, he continues, "This body is tethered here to the Nexus, but in your body I will rebuild the Gateways and rule over them with an undying fist!"
+        <br>Observing your valiant struggle against your eldritch bonds, he continues, "I may have neglected to mention that the soul that caused this destruction was my very own. I <b>slaughtered</b> that bumbling Nexus Keeper and rendered this place useless. To give him credit, he was tougher than he appeared and I had to claim his body to survive. Unfortunately, as you know, this body is tethered here to the Nexus, but in your body I will rebuild the Gateways and rule over them with an undying fist!"
         <div id="bottomSection">[[The fog engulfs the room->eFinal]]</div>
         <</nobr>>
 
 :: Gateways [hub] {"position":"750,550"}
-    <<nobr>>In this chamber stands many Gateways. However, all but one are shattered.
+    <<nobr>>
+    Along the walls are a multitude of archways emblazoned with a single gem.<br><br>The archways are shattered however, with large chunks removed from all but one.
     <br>
+    <br><img src="assets/gateway.jpg">
+    <<passiveHeal>>
     <div id="bottomSection"><<if $IntroAct1 is false>>
     <<linkreplace "Investigate the only lit portal">>
     The portal activates at your touch and seems to beckon you inside.
@@ -51,7 +54,15 @@
     <br>[[Go through the Monarch's Portal->Act1Start]]
     <</if>>
     <br>
-    <br>[[Return to the center of the Nexus->MidNexus]]</div><</nobr>>
+    <br>[[Return to the center of the Nexus->MidNexus]]</div>
+        <</nobr>>
 
 :: EndCard [hub]
-    The End
+    <<nobr>>
+    As you land the killing blow, the shadow screeches, "<b>NOooOoOOoOOOOOOoo!</b>"", before completely dissapting, his soul lost forever. The body of the Nexus Keeper falls out of the fog, lifeless on the floor. That poor Old Man
+    <br><br>After ascending the steps and emerging from the interior of the pillar, you are unsure of what to do with yourself. Your only hint of what the hell happened to you just disappeared without a trace.
+    <br><br>While you think of possiblities, the gemstones on the pillars catch your eye. Each gemstone lodged in the pillar matches an impression above each shattered Gateway. Is it possible that the Gateways can be restored?
+    <br><br>After extensive examination you resign yourself to the task of repairing the Gateways, but the only question is: how?
+    <br><br>It appears as if your future is in your own hands now. Whether you wish to take up the role of the Nexus Keeper, follow in that crazed soul's ambitions, or simply live the life of a realm-hopping adventurer is up to you...
+    <br><br><i><b>The End</b></i>
+        <</nobr>>
