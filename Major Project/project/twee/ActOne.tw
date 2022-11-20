@@ -367,6 +367,7 @@
     <br>The townsfolk are already running along a path stretching into the forest as you exit, forming a protective barrier of flame from any attacking meenlocks. Not that they would have noticed, as they all rush directly towards their now destroyed nest.
     <br>
     <br>Some time later, the townsfolk slow to a steady pace, as a head count is conducted to check for casualties. Incredibly, none of the fleeing villagers have vanished. The captain seems relieved that his plan worked, and dawn is breaking as the group approaches Quasiton. 
+    <<passiveHeal>>
     <div id="bottomSection">[[Arrive at Quasiton->QuasitonCenter]]</div>
     <</nobr>>
 
@@ -384,5 +385,6 @@
     <br>As soon as this thought crosses your mind, a cry is heard from the forest as every Meenlock that could move bears down upon the town to feast upon the despair. 
     <br>
     <br>Your benefactor is overjoyed watching the destruction. After he's had his fill, he turn to you and states, "Now, that our business is concluded, we must never meet again. I was never in the town of Vermeillon, and you never had a hand in its destruction." With that, he vanishes into that same black haze that extradited you from the cave, and you are once again alone the dawn breaks. 
+    <<passiveHeal>>
     <div id="bottomSection">[[Return to the Castle->CastleGates]]</div>
     <</nobr>>

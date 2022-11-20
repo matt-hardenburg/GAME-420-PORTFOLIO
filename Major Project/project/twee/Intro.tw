@@ -1,5 +1,5 @@
 :: Start [intro] {"position":"0,150"}
-    <<nobr>><div id="imgDiv"><img src="assets/intro_1.jpeg"></div><br><i>There is no audio in this game, so set up a playlist of your favorite songs and jam out. Or just play in silence I guess...</i><br><br><b>IT IS RECOMMENDED TO PLAY THE GAME WITH THE SIDEBAR STOWED</b><</nobr>>
+    <<nobr>><div id="imgDiv"><img src="assets/intro_1.jpeg"></div><br><i>There is no audio in this game, so set up a playlist of your favorite songs and jam out. <br><br>Or just play in silence I guess...</i><br><br><b>IT IS RECOMMENDED TO PLAY THE GAME WITH THE SIDEBAR STOWED AND TO SAVE OFTEN!</b><</nobr>>
     <div id="bottomSection">[[Begin->Intro]]</div>
     
 :: Intro [intro] {"position":"0,300"}

@@ -51,7 +51,7 @@
     <<run $shopInv.pickup("Health Potion", 10)>>
 
 :: StorySubtitle [data] {"position":"150,150"}
-    v1.0.5
+    v1.0.9
 
 :: StoryTitle [data] {"position":"150,150"}
     Undying
