@@ -13,8 +13,8 @@
     <br>
     <br>[[Head back towards the Gateway->Act1Start]]
     <br>
-    <br>Near the crater where the shop used to be is a small stand selling potions. <<set _potionCost to 30 - Math.round($playerBarter/2)>>
-    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
+    <br>Near the crater where the shop used to be is a small stand selling potions. (<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span>&nbsp;remaining)<<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><<else>><i>You don't seem to have enough gold...</i><</if>><</link>>
     <br>
     <br>
     A small inn sits right next to where the shop used to be, how convenient.<<set _innCost to 40 - 2*Math.round($playerBarter/2)>>
@@ -125,7 +125,7 @@
 
     <<passiveHeal>><<pathAmbush>><<if $ambushFlag is true and $badLuckProtection is false>><<set $savedPassage to passage()>><<set _randomEnemy to random(1, 2)>><<if _randomEnemy is 1>><<goto "eKobold">><<else>><<goto "eOrc">><</if>><<else>><<set $badLuckProtection to false>><</if>>
     <div id="bottomSection">[[Head towards the castle gates->CastleGates]]
-    <<if $foundShrine is true>><br>[[Venture towards to the shrine->Path3C]]<</if>>
+    <<if $foundShrine is true>><br>[[Venture towards the shrine->Path3C]]<</if>>
     <br>[[Venture into the woods leading towards Quasiton->Path3B]]</div>
         <</nobr>>
 
@@ -266,7 +266,7 @@
     <br>
     <br>Outside of the town, the token guard force notices the commotion barreling towards them, and quickly raises the alarm. After a short delay a small group of around 15 villagers emerge bearing torches at the entrance.
     <br>
-    <br>The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the "guard" who saw your approach quips, "Hell of a time to come visitng Vermeillon, now you're trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day." As he returns to his post, he informs you, "Go have a rest at the inn and find the Captain in the morning if you want to help." 
+    <br>The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the "guard" who saw your approach quips, "Hell of a time to come visiting Vermeillon, now you're trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day." As he returns to his post, he informs you, "Go have a rest at the inn and find the Captain in the morning if you want to help." 
     <div id="bottomSection">[[What the hell is going on here?->Vermeillon]]</div><</nobr>>
 
 :: Vermeillon [ActOne]
@@ -277,8 +277,8 @@
     <br>A shoddy inn sits at the center of town, free of charge currently due to lack of staff.
     <br><<linkreplace "Rest at the makeshift inn">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a "refreshing" rest...</i><</linkreplace>>
     <br>
-    <br>Nestled next to the inn is an alchemist brewing potions for the relief effort.<<set _potionCost to 30 - Math.round($playerBarter/2)>>
-    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
+    <br>Nestled next to the inn is an alchemist brewing potions for the relief effort. (<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span>&nbsp;remaining)<<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><<else>><i>You don't seem to have enough gold...</i><</if>><</link>>
     <br>
     <br><<if $path is "bad">>The guard captain is mysteriously absent from his usually station directin relief efforts. Your curiousity is piqued, causing explore the area. As soon as you do though, you wish you hadn't. The body of the guard captain lies mutilated on the ground, drawn and quartered in a deliberate attempt to inspire dread in those who knew him. You steel yourself and quickly exit the area.  
         <<else>><br>A man clad in armor bearing the symbol of the Monarch seems to be directing relief efforts here.

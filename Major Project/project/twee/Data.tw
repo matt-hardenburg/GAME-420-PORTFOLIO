@@ -51,7 +51,7 @@
     <<run $shopInv.pickup("Health Potion", 10)>>
 
 :: StorySubtitle [data] {"position":"150,150"}
-    v1.0.0
+    v1.0.5
 
 :: StoryTitle [data] {"position":"150,150"}
     Undying
@@ -66,8 +66,9 @@
     <div id="objectives"><<print $currentObjective>></div><</nobr>>
 
 :: StoryMenu [data] {"position":"150,150"}
-    <<link "Stats" "PlayerStats">><<if passage() is not "PlayerStats">><<set $preMenu1 to passage()>><</if>><</link>>
-    <<link "Inventory" "PlayerInventory">><<if passage() is not "PlayerInventory">><<set $preMenu2 to passage()>><</if>><</link>>
+    <<if passage() is not "PlayerStats">><<link "Stats" "PlayerStats">><<set $preMenu1 to passage()>><</link>><<else>><<link "Back">><<goto $preMenu1>><</link>><</if>>
+
+
 :: PlayerStats [data]
     <center>
     <div id="stats">
@@ -85,16 +86,11 @@
     <div id="stats">
         <b>Barter:</b>  <<print $playerBarter>>
         <b>Medicine:</b>  <<print $playerMedicine>>
-        <b>Speech:</b>  <<print $playerSpeech>>
         <b>Survival:</b>  <<print $playerSurvival>>
         <b>Looting:</b>  <<print $playerLooting>>
     </div>
-    <div id="stats"><<if $preMenu1 is "PlayerInventory">><<link "Return" $preMenu2>><</link>><<else>><<link "Return" $preMenu1>><</link>><</if>></div>
     </center>
 
-:: PlayerInventory
-    <<inv $playerInv inspect, use, drop>>
-    <div id="bottomSection"><<if $preMenu2 is "PlayerStats">><<link "Return" $preMenu1>><</link>><<else>><<link "Return" $preMenu2>><</link>><</if>></div>
     
 
 :: MyWidgets [widget]
