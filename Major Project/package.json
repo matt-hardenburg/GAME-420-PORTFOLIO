@@ -1,6 +1,6 @@
 {
   "name": "major-project",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "My GAME 420 Major Project",
   "main": "index.js",
   "scripts": {

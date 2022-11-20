@@ -529,7 +529,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;br&gt;
     &lt;br&gt;Outside of the town, the token guard force notices the commotion barreling towards them, and quickly raises the alarm. After a short delay a small group of around 15 villagers emerge bearing torches at the entrance.
     &lt;br&gt;
-    &lt;br&gt;The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the &quot;guard&quot; who saw your approach quips, &quot;Hell of a time to come visitng Vermeillon, now you&#39;re trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day.&quot; As he returns to his post, he informs you, &quot;Go have a rest at the inn and find the Captain in the morning if you want to help.&quot; 
+    &lt;br&gt;The sea of fire parts slightly, allowing for you to pass through to safety, while the Meenlocks screech and flee back into the darkness. After you gain your bearings, the &quot;guard&quot; who saw your approach quips, &quot;Hell of a time to come visiting Vermeillon, now you&#39;re trapped here like the rest of us. Damn creatures have us surrounded and kill those who try to leave. Not to mention that the fire only scares them off during the day.&quot; As he returns to his post, he informs you, &quot;Go have a rest at the inn and find the Captain in the morning if you want to help.&quot; 
     &lt;div id=&quot;bottomSection&quot;&gt;[[What the hell is going on here?-&gt;Vermeillon]]&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="Vermeillon" tags="ActOne" position="975,225" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $introQuest2 is true&gt;&gt;&lt;&lt;set $respawnPoint to passage()&gt;&gt;&lt;&lt;set $introQuest2 to false&gt;&gt;&lt;&lt;/if&gt;&gt;
     The town mine sits at the far end of the settlement, built into a massive mountain dotted with trees. It is the source of the rumors the king mentioned.
     &lt;br&gt;[[Enter the mine-&gt;VermeillonMine]]
@@ -621,6 +621,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;br&gt;The townsfolk are already running along a path stretching into the forest as you exit, forming a protective barrier of flame from any attacking meenlocks. Not that they would have noticed, as they all rush directly towards their now destroyed nest.
     &lt;br&gt;
     &lt;br&gt;Some time later, the townsfolk slow to a steady pace, as a head count is conducted to check for casualties. Incredibly, none of the fleeing villagers have vanished. The captain seems relieved that his plan worked, and dawn is breaking as the group approaches Quasiton. 
+    &lt;&lt;passiveHeal&gt;&gt;
     &lt;div id=&quot;bottomSection&quot;&gt;[[Arrive at Quasiton-&gt;QuasitonCenter]]&lt;/div&gt;
     &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="VermeillonBadEnd" tags="ActOne" position="100,350" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;set $respawnPoint to &quot;CastleGates&quot;&gt;&gt;&lt;&lt;set $vermeillonFinished to true&gt;&gt;&lt;&lt;set $secondQuestState to &quot;d&quot;&gt;&gt;&lt;&lt;set $end to &quot;bad&quot;&gt;&gt;&lt;&lt;set $currentObjective to &quot;Report back to the Monarch&quot;&gt;&gt;&lt;&lt;replace &quot;#objectives&quot;&gt;&gt;&lt;&lt;print $currentObjective&gt;&gt;&lt;&lt;/replace&gt;&gt;
     Upon your arrival the hooded figure strides over towards you. &quot;Well done $class, the charges are set and this explosion shall cause a landslide that will wipe out the town. Here&#39;s your gold, killer.&quot; &lt;&lt;set $playerGold to $playerGold + 1000&gt;&gt;&lt;&lt;replace &quot;#goldOwned&quot;&gt;&gt;Gold: &lt;&lt;print $playerGold&gt;&gt;&lt;&lt;/replace&gt;&gt;
@@ -634,6 +635,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;br&gt;As soon as this thought crosses your mind, a cry is heard from the forest as every Meenlock that could move bears down upon the town to feast upon the despair. 
     &lt;br&gt;
     &lt;br&gt;Your benefactor is overjoyed watching the destruction. After he&#39;s had his fill, he turn to you and states, &quot;Now, that our business is concluded, we must never meet again. I was never in the town of Vermeillon, and you never had a hand in its destruction.&quot; With that, he vanishes into that same black haze that extradited you from the cave, and you are once again alone the dawn breaks. 
+    &lt;&lt;passiveHeal&gt;&gt;
     &lt;div id=&quot;bottomSection&quot;&gt;[[Return to the Castle-&gt;CastleGates]]&lt;/div&gt;
     &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Log" tags="" position="225,350" size="100,100">&lt;div id=&quot;log&quot;&gt;
         &lt;&lt;if $log is &quot;you&quot;&gt;&gt;
@@ -952,7 +954,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;&lt;set $playerInv to Inventory.create()&gt;&gt;
     &lt;&lt;run $playerInv.pickup(&quot;Health Potion&quot;, 3)&gt;&gt;
     &lt;&lt;set $shopInv to Inventory.create()&gt;&gt;
-    &lt;&lt;run $shopInv.pickup(&quot;Health Potion&quot;, 10)&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="StorySubtitle" tags="data" position="150,150" size="100,100">v1.0.5</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="data" position="475,475" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;run $shopInv.pickup(&quot;Health Potion&quot;, 10)&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="StorySubtitle" tags="data" position="150,150" size="100,100">v1.0.9</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="data" position="475,475" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;br&gt;&lt;&lt;if not $inCombat&gt;&gt;
         &lt;&lt;showmeter &#39;pHP&#39; $playerHP / $playerMHP&gt;&gt;
         &lt;&lt;/if&gt;&gt;
@@ -1046,7 +1048,7 @@ ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-
     &lt;br&gt;&lt;br&gt;After extensive examination you resign yourself to the task of repairing the Gateways, but the only question is: how?
     &lt;br&gt;&lt;br&gt;It appears as if your future is in your own hands now. Whether you wish to take up the role of the Nexus Keeper, follow in that crazed soul&#39;s ambitions, or simply live the life of a realm-hopping adventurer is up to you...
     &lt;br&gt;&lt;br&gt;&lt;i&gt;&lt;b&gt;The End&lt;/b&gt;&lt;/i&gt;
-        &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Start" tags="intro" position="0,150" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div id=&quot;imgDiv&quot;&gt;&lt;img src=&quot;assets/intro_1.jpeg&quot;&gt;&lt;/div&gt;&lt;br&gt;&lt;i&gt;There is no audio in this game, so set up a playlist of your favorite songs and jam out. Or just play in silence I guess...&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;IT IS RECOMMENDED TO PLAY THE GAME WITH THE SIDEBAR STOWED&lt;/b&gt;&lt;&lt;/nobr&gt;&gt;
+        &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Start" tags="intro" position="0,150" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div id=&quot;imgDiv&quot;&gt;&lt;img src=&quot;assets/intro_1.jpeg&quot;&gt;&lt;/div&gt;&lt;br&gt;&lt;i&gt;There is no audio in this game, so set up a playlist of your favorite songs and jam out. &lt;br&gt;&lt;br&gt;Or just play in silence I guess...&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;IT IS RECOMMENDED TO PLAY THE GAME WITH THE SIDEBAR STOWED AND TO SAVE OFTEN!&lt;/b&gt;&lt;&lt;/nobr&gt;&gt;
     &lt;div id=&quot;bottomSection&quot;&gt;[[Begin-&gt;Intro]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="Intro" tags="intro" position="0,300" size="100,100">&lt;i&gt;This isn&#39;t how the job was supposed to go...&lt;/i&gt;&lt;br&gt;&lt;br&gt;You think this to yourself, as you lay bleeding out in the murky swamp. Vultures circle overhead, sensing that their meal is nearly prepared. Hopefully they don&#39;t mind picking through your armor, not to mention the vile sludge from the swamp that was supposed to act as camoflauge.
     &lt;br&gt;&lt;img src=&quot;assets/introSeq.jpg&quot;&gt;
     &lt;br&gt;&lt;br&gt;In the end, it didn&#39;t matter. Removing the dagger lodged in your gut to speed up the process, you think to yourself...
