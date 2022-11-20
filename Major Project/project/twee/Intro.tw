@@ -1,12 +1,11 @@
 :: Start [intro] {"position":"0,150"}
-    <b><u>Ipsum</u></b>
-
-    <<nobr>><div id="imgDiv">
-<img src="assets/intro_1.jpeg"></div><</nobr>>
+    <<nobr>><div id="imgDiv"><img src="assets/intro_1.jpeg"></div><br><i>There is no audio in this game, so set up a playlist of your favorite songs and jam out. Or just play in silence I guess...</i><br><br><b>IT IS RECOMMENDED TO PLAY THE GAME WITH THE SIDEBAR STOWED</b><</nobr>>
     <div id="bottomSection">[[Begin->Intro]]</div>
     
 :: Intro [intro] {"position":"0,300"}
-    Man I diededed...
+    <i>This isn't how the job was supposed to go...</i><br><br>You think this to yourself, as you lay bleeding out in the murky swamp. Vultures circle overhead, sensing that their meal is nearly prepared. Hopefully they don't mind picking through your armor, not to mention the vile sludge from the swamp that was supposed to act as camoflauge.
+    <br><img src="assets/introSeq.jpg">
+    <br><br>In the end, it didn't matter. Removing the dagger lodged in your gut to speed up the process, you think to yourself...
 
     <div id="bottomSection">[[How did I get here?->CharacterCreation]]</div>
 
@@ -312,6 +311,7 @@
             <<run alert("Spend all of your points first!")>>
         <</if>>
         <<if $attributePoints is 0 and $skillPoints is 0>>
+            <<set $dummyFlag to false>>
             <<goto "CharacterExposition">>
         <</if>>
     <</link>></div>
@@ -320,36 +320,51 @@
     <<nobr>>
         <<if $class is "Justicar">>
             <<set $playerCon++>><<set $playerStr++>><<set $playerBarter to $playerBarter + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
-            Justicar background
-            <br>Fill me in!
+            I am $playerName, and I am a Justicar for the Curch of the Light.
+            <br><br>For as long as I can remember I've felt the embrace of the church, leading to me joining the selective branch of Church Justicars.
+            <br><br>Intense training combined with the power of the Light have allowed me to harness the ability to siphon my opponent's life.
+            <br><br>I've never failed a mission with the Light on my side.
+            <br><br><i>Has the light abandoned me?...</i>
         <<elseif $class is "Spellblade">>
             <<set $playerInt++>><<set $playerDex++>><<set $playerMedicine to $playerMedicine + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
-            Spellblade background
-            <br>Fill me in!
+            I am $playerName, and I am a travelling Spellblade, acting as a mercenary.
+            <br><br>For as long as I can remember I've always had magical tendencies, but I've only been able to channel fire.
+            <br><br>After being laughed out of the Kingdom's Magic Academy, I set off as a traveling mercenary honing my swordplay to complment my fire magic.
+            <br><br><i>No enemy has been my equal until now...</i>
         <<elseif $class is "Cultist">>
             <<set $playerLck++>><<set $playerCon++>><<set $playerSpeech to $playerSpeech + 5>><<set $playerAC to 10 + Math.round($playerDex/2)>><<set $playerMHP to 30 + 5 * $playerCon>><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>>
-            Cultist background
-            <br>Fill me in!
+            I am $playerName, and I am a Cultist in service to the Forbidden One.
+            <br><br>For as long as I can remember I've always felt the pull of a supernatural entity on my sanity, but it was only when I join the Order of Heretics that I learned how to harness it.
+            <br><br>The Forbidden One is everywhere, and is always watching, waiting for your soul to be claimed and delivered as a sacrfice.
+            <br><br><i>Looks like its my turn...</i>
         <</if>>
-    <br><br>
-    Rest of the expostion...
+    <br><img src="assets/transition.jpg">
+    <<passiveHeal>>
     <</nobr>>
 
     <div id="bottomSection">[[What's happening to me?->NexusIntro]]</div>
 
 :: NexusIntro [intro] {"position":"150,550"}
-    Deja vu...
-
-
+    <<nobr>>
+    Despite all evidence claiming otheerwise, you are not dead. Or at least not conventionally.
+    <br><br>You awaken in a larged circular stone chamber, your body propped up against a massive stone pillar at the center. You instinctively check your mortal wound, but find that your skin is untouched, without even a scar.
+    <br><br>While you are busy inspecting your stomach, an old man scurries up beside you.
+    <br><img src="assets/oldMan.png">
+    <br>"What do we have here? A lost soul perhaps?" he questions. "No matter... if you are here..." he mutters to himself. 
+    <br><br>"A soul with no place to truly call home, and a body that refuses to die... You could save this realm!" he cries. Before you have a chance to object, he launches into the history of this area, called the Nexus, and you already lost focus.
+    <br><br>By time he finishes, you think you understand the gist of the situation:
+    <br><i>Long ago, the nexus was hub for souls to pass-through on their journey to reincarnation. Each soul would arrive and be directed through a portal into their new life. At some point however, a soul retained is abilities after death and trapped the humble Nexus Keeper in this realm. Before that however, he shattered all but one portal and disappeared through it. Now, with the Nexus inactive, incoming souls are lost forever. According to the old man, the "Runestone of the Monarch" is required to repair the Nexus. Since moving through the portals is an act of reincarnation, your unique situation allows for you to freely travel between realms, so now it is up to you to retreive that Runestone.</i>
+    <<passiveHeal>>
     <div id="bottomSection"><<link "Onward! I guess?" "MidNexus">><<set $currentObjective to "Find the Monarch's Runestone">><<replace "#objectives">><<print $currentObjective>><</replace>><</link>></div>
+        <</nobr>>
 
 :: Class Info Justicar {"position":"150,150"}
-    Justicar guy (+1 CON, +1 STR, +5 Barter)
+    (Gains access to "Divine Siphon", +1 CON, +1 STR, +5 Barter)
 
 :: Class Info Spellblade {"position":"150,150"}
-    Spellblade guy (+1 INT, +1 DEX, +5 Medicine)
+    (Gains access to "Fireball",+1 INT, +1 DEX, +5 Medicine)
 
 :: Class Info Cultist {"position":"150,150"}
-    Cultist guy (+1 LCK, +1 CON, +5 Speech)
+    (Gains access to "Touch of the Heretic",+1 LCK, +1 CON, +5 Speech)
 
 :: Background Info undefined {"position":"150,150"}

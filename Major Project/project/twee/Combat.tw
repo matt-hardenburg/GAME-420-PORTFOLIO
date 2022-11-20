@@ -214,7 +214,7 @@
 
 :: Win
     <<if $eName is "Shadow">><<goto "EndCard">><</if>>
-    <<if $instaKill is true>>You claimed their soul for the Forbidden One!<br><<set $instaKill to false>><</if>><<set $foundGold to random(5, 20) + 2 * $playerLooting>>
+    <<if $instaKill is true>>Instant kill! You claimed their soul for the Forbidden One!<br><<set $instaKill to false>><</if>><<set $foundGold to random(5, 20) + 2 * $playerLooting>>
     After defeating the <<print $eName>>, you found <<print $foundGold>> gold!<<if $path is "bad">><br>You place a dynamite charge near where the $eName fell.<</if>>
     <<set _potionReward to random(1,20)>>
     <<if _potionReward gte 12>> You also found a health potion! <<run $playerInv.pickup("Health Potion", 1)>>
@@ -246,7 +246,7 @@
     <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
 
 :: eOrc
-    <div id="imageAndText">Suddenly an orc jumps out in front of you brandishing a blade!
+    <div id="imageAndText">An orc jumps out of its hiding place and attacks!
     
     <img src="assets/enemies/orc1.png"></div>
     <<nobr>>
@@ -265,7 +265,7 @@
     <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
 
 :: eMeenlock
-    <div id="imageAndText">Suddenly a meenlock materializes in front of you!
+    <div id="imageAndText">A meenlock suddenly materializes in front of you!
 
     <img src="assets/enemies/meenlock.png"></div>
     <<nobr>>
@@ -284,7 +284,7 @@
     <div id="bottomSection">[[Kick it's ass!->Combat]]</div>
 
 :: eFinal
-    <div id="imageAndText">As quickly as you were engulfed, the fog disperses and coalesces into the shape of a man, albeit featureless; the Old Man is now a being of pure shadow.<br><br>However, as he was transforming his concentartion wavered, allowing you to break free from your bonds. You think to yourself, "If he intends to steal my body, he won't do so without a fight!"
+    <div id="imageAndText">As quickly as you were engulfed, the fog disperses and coalesces into the shape of a man, albeit featureless; the Old Man is now a being of pure shadow.<br><br>However, as he was transforming his concentration wavered, allowing you to break free from your bonds. You think to yourself, "If he intends to steal my body, he won't do so without a fight!"
     
     <img src="assets/enemies/final.png"></div>
     <<nobr>>
