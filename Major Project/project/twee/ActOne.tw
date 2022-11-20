@@ -13,8 +13,8 @@
     <br>
     <br>[[Head back towards the Gateway->Act1Start]]
     <br>
-    <br>Near the crater where the shop used to be is a small stand selling potions. <<set _potionCost to 30 - Math.round($playerBarter/2)>>
-    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
+    <br>Near the crater where the shop used to be is a small stand selling potions. (<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span>&nbsp;remaining)<<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><<else>><i>You don't seem to have enough gold...</i><</if>><</link>>
     <br>
     <br>
     A small inn sits right next to where the shop used to be, how convenient.<<set _innCost to 40 - 2*Math.round($playerBarter/2)>>
@@ -277,8 +277,8 @@
     <br>A shoddy inn sits at the center of town, free of charge currently due to lack of staff.
     <br><<linkreplace "Rest at the makeshift inn">><<set $playerHP to $playerMHP>><<updatemeter 'pHP' '$playerHP / $playerMHP'>><<set $respawnPoint to passage()>><i>What a "refreshing" rest...</i><</linkreplace>>
     <br>
-    <br>Nestled next to the inn is an alchemist brewing potions for the relief effort.<<set _potionCost to 30 - Math.round($playerBarter/2)>>
-    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><</if>><</link>>
+    <br>Nestled next to the inn is an alchemist brewing potions for the relief effort. (<span id="healthPotion"><<print $playerInv.count("Health Potion")>></span>&nbsp;remaining)<<set _potionCost to 30 - Math.round($playerBarter/2)>>
+    <br><<link "Purchase one for _potionCost gold">><<if $playerGold gte _potionCost>><<set $playerGold to $playerGold - _potionCost>><<replace "#goldOwned">>Gold: <<print $playerGold>><</replace>><<run $playerInv.pickup("Health Potion", 1)>><<replace "#healthPotion">><<print $playerInv.count("Health Potion")>><</replace>><<else>><i>You don't seem to have enough gold...</i><</if>><</link>>
     <br>
     <br><<if $path is "bad">>The guard captain is mysteriously absent from his usually station directin relief efforts. Your curiousity is piqued, causing explore the area. As soon as you do though, you wish you hadn't. The body of the guard captain lies mutilated on the ground, drawn and quartered in a deliberate attempt to inspire dread in those who knew him. You steel yourself and quickly exit the area.  
         <<else>><br>A man clad in armor bearing the symbol of the Monarch seems to be directing relief efforts here.
