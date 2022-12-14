@@ -1,6 +1,6 @@
 # GAME-420-PORTFOLIO
 
-Click on the desired .zip file to download the project
+Click on the desired .zip file, the select download on the subsequent page to download the project
 
 Project reflections and write-ups can be found in their respective .zip folders
 
