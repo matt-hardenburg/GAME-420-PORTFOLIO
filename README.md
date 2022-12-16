@@ -10,3 +10,8 @@ Contact Information:
 Email: mzh5947@psu.edu
 
 LinkedIn: https://www.linkedin.com/in/matthew-hardenburg/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Skills utilized in these projects were mainly HTML/CSS as well as Harlowe and Sugarcube.
+
+I also have gained experience in C# from my efforts in Unity.
